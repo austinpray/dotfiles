@@ -40,7 +40,6 @@ hi IndentGuidesOdd  ctermbg=darkgrey
 hi IndentGuidesEven ctermbg=black
 
 let g:vim_markdown_folding_disabled=1
-let g:neocomplcache_enable_at_startup = 1
 
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
@@ -51,8 +50,6 @@ let g:syntastic_mode_map = { 'mode': 'active',
   \ 'passive_filetypes': ['html'] }
 let g:syntastic_check_on_open = 1
 
-map <leader>f :CtrlPMixed<cr>
-map <leader>p :CtrlPBuffer<cr>
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 filetype plugin indent on
@@ -96,7 +93,7 @@ function! s:unite_settings()
 endfunction
 
 " neocomplete
-"
+
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.

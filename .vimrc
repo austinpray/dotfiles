@@ -1,6 +1,5 @@
 " Inspired by
 " https://github.com/skwp/dotfiles/blob/master/vimrc
-" I fucking love vim lol
 " ================ General Config ====================
 
 set nocompatible                " be iMproved, required
@@ -9,7 +8,6 @@ set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
 set showmode                    "Show current mode down the bottom
-" set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
 set hidden
@@ -19,7 +17,7 @@ set noesckeys
 syntax on
 filetype off                    " required
 
-" =============== Vundle Initialization ===============
+" =============== Vim-Plug Initialization ===============
 if filereadable(expand("~/.vim/vundles.vim"))
   source ~/.vim/vundles.vim
 endif
