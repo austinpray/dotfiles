@@ -4,7 +4,7 @@ shopt -s extglob
 
 # Environment Variables
 export CLICOLOR=1
-export EDITOR='vim'
+export EDITOR="vim"
 export GOPATH=$HOME/go
 export NVM_DIR=~/.nvm
 export PAGER=/usr/local/bin/vimpager
@@ -41,7 +41,7 @@ fi
 # Aliases
 alias be="bundle exec "
 alias chrome="open /Applications/Google\ Chrome.app "
-alias hsdeploy='bundle exec rake assets:precompile RAILS_ENV=production && git add -A && git commit -a -m "compiled assets for production, updates manifest file" && git push'
+alias hsdeploy="bundle exec rake assets:precompile RAILS_ENV=production && git add -A && git commit -a -m "compiled assets for production, updates manifest file" && git push"
 alias less=$PAGER
 alias zless=$PAGER
 alias pcr="rake assets:precompile RAILS_ENV=production"
