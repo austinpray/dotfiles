@@ -75,8 +75,7 @@ if executable('ag')
 endif
 
 nnoremap <C-p>    :Unite -no-split -start-insert file_rec/async<cr>
-nnoremap <space>p :Unite -no-split -start-insert -default-action=vsplit -start-insert file_rec/async<cr>
-
+nnoremap <space>p :Unite -no-split -start-insert -default-action=vsplit file_rec/async<cr>
 nnoremap <space>/ :Unite -no-split -start-insert grep:.<cr>
 nnoremap <space>y :Unite -no-split -start-insert -buffer-name=yank    history/yank<cr>
 nnoremap <space>e :Unite -no-split -start-insert -buffer-name=buffer  buffer<cr>
@@ -85,8 +84,6 @@ nnoremap <space>r :Unite -no-split -start-insert -buffer-name=mru     file_mru<c
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
-  " Play nice with supertab
-  let b:SuperTabDisabled=1
   " Enable navigation with control-j and control-k in insert mode
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
