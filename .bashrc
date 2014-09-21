@@ -15,7 +15,6 @@ export TERM="xterm-256color"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
-export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="/usr/local/mysql/bin:$PATH"
@@ -41,7 +40,7 @@ fi
 # Aliases
 alias be="bundle exec "
 alias chrome="open /Applications/Google\ Chrome.app "
-alias hsdeploy="bundle exec rake assets:precompile RAILS_ENV=production && git add -A && git commit -a -m "compiled assets for production, updates manifest file" && git push"
+alias hsdeploy="bundle exec rake assets:precompile RAILS_ENV=production && git add -A && git commit -a -m 'compiled assets for production, updates manifest file' && git push"
 alias less=$PAGER
 alias zless=$PAGER
 alias pcr="rake assets:precompile RAILS_ENV=production"
