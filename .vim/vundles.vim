@@ -4,6 +4,7 @@ Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim'
+Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
@@ -12,7 +13,6 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-dispatch'
@@ -33,22 +33,20 @@ Plug 'ingydotnet/yaml-vim',       { 'for': 'yaml' }
 call plug#end()
 
 " Plugin Settings
+
 set background=dark
 colorscheme solarized
 let g:solarized_termcolors=256
-hi IndentGuidesOdd  ctermbg=darkgrey
-hi IndentGuidesEven ctermbg=black
 
 let g:vim_markdown_folding_disabled=1
-
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 
 let g:syntastic_mode_map = { 'mode': 'active',
   \ 'active_filetypes': ['javascript'],
   \ 'passive_filetypes': ['html'] }
 let g:syntastic_check_on_open = 1
+
+let g:indentLine_char = '┊'
+let g:indentLine_enabled = 1
 
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 

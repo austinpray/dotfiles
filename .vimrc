@@ -18,8 +18,8 @@ syntax on
 filetype off                    " required
 
 " =============== Vim-Plug Initialization ===============
-if filereadable(expand("~/.vim/vundles.vim"))
-  source ~/.vim/vundles.vim
+if filereadable(expand("~/dotfiles/.vim/vundles.vim"))
+  source ~/dotfiles/.vim/vundles.vim
 endif
 
 " ================ Turn Off Swap Files ==============
@@ -97,12 +97,14 @@ set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
-" Maps
+" ================== Maps ==========================
 
 " Useful mappings for managing buffers
 map <leader>] :bnext<cr> 
 map <leader>[ :bprev<cr> 
-map <leader>bd :bd<cr>
+nnoremap <space>t :tabnew<cr>
+nnoremap <space>] :tabn<cr>
+nnoremap <space>[ :tabp<cr>
 
 nmap <silent> <leader>s :set spell!<CR>
 
@@ -110,10 +112,6 @@ nmap <F2> :update<CR>
 vmap <F2> <Esc><F2>gv
 imap <F2> <c-o><F2>
 " Splits
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
 map <leader>" :sp<CR>
 map <leader>% :vsp<CR>
 
