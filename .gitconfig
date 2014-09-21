@@ -1,38 +1,23 @@
 [user]
-	email = austin@austinpray.com
-	name = Austin Pray
+  email = austin@austinpray.com
+  name = Austin Pray
+
 [core]
-	excludesfile = /Users/austinpray/.gitignore_global
-	editor = vim
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  excludesfile = ~/dotfiles/.gitignore_global
+  editor = vim
+
 [push]
-	default = simple
+  default = simple
+
 [color]
-	ui = true
+  ui = true
 
 [alias]
   delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
   syncup = "!f() { git checkout --quiet master && git pull upstream master && git push origin master; }; f"
 
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
-[diff]
-	tool = Kaleidoscope
 [difftool]
-	prompt = false
+  prompt = false
+
 [mergetool]
-	prompt = false
-[merge]
-[filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
-[merge]
-	tool = opendiff
+  prompt = false
