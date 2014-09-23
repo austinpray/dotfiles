@@ -12,6 +12,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-dispatch'
@@ -32,10 +33,15 @@ Plug 'ingydotnet/yaml-vim',       { 'for': 'yaml' }
 call plug#end()
 
 " Plugin Settings
-
+set t_Co=256
 set background=dark
 colorscheme solarized
 let g:solarized_termcolors=256
+
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black   ctermbg=8
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=brgreen ctermbg=0
+let g:indent_guides_enable_on_vim_startup = 1
 
 let g:vim_markdown_folding_disabled=1
 
