@@ -4,7 +4,6 @@ Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim'
-Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
@@ -44,9 +43,6 @@ let g:syntastic_mode_map = { 'mode': 'active',
   \ 'active_filetypes': ['javascript'],
   \ 'passive_filetypes': ['html'] }
 let g:syntastic_check_on_open = 1
-
-let g:indentLine_char = '┊'
-let g:indentLine_enabled = 1
 
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
