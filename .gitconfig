@@ -12,9 +12,16 @@
 [color]
   ui = true
 
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red
+  new = blue
+
 [alias]
   delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
   syncup = "!f() { git checkout --quiet master && git pull upstream master && git push origin master; }; f"
+  visual = "!f() { gitk --simplify-by-decoration --all; }; f"
 
 [difftool]
   prompt = false

@@ -10,6 +10,7 @@ Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
+Plug 'greyblake/vim-preview'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -18,17 +19,19 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
+Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'vim-scripts/gitignore'
 Plug 'wikitopian/hardmode'
+Plug 'plasticboy/vim-markdown'
 
 Plug 'digitaltoad/vim-jade',      { 'for': 'jade' }
 Plug 'pangloss/vim-javascript',   { 'for': 'javascript' }
 Plug 'elzr/vim-json',             { 'for': 'json' }
-Plug 'plasticboy/vim-markdown',   { 'for': 'markdown' }
 Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
 Plug 'LaTeX-Box-Team/LaTeX-Box',  { 'for': 'tex' }
 Plug 'ingydotnet/yaml-vim',       { 'for': 'yaml' }
+Plug 'evidens/vim-twig'
 
 call plug#end()
 
@@ -38,10 +41,14 @@ set background=dark
 colorscheme solarized
 let g:solarized_termcolors=256
 
+let g:vim_json_syntax_conceal = 0
+
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black   ctermbg=8
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=brgreen ctermbg=0
 let g:indent_guides_enable_on_vim_startup = 1
+
+let vimpager_disable_ansiesc = 1
 
 let g:vim_markdown_folding_disabled=1
 
@@ -54,14 +61,12 @@ nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 filetype plugin indent on
 
-let g:languagetool_jar='$HOME/bin/LanguageTool-2.5/languagetool-commandline.jar'
-
 let g:instant_markdown_slow = 1
 
 " unite
 let g:unite_source_history_yank_enable = 1  
 
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
 if executable('ag')
   let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
