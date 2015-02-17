@@ -22,9 +22,14 @@
   delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
   syncup = "!f() { git checkout --quiet master && git pull upstream master && git push origin master; }; f"
   visual = "!f() { gitk --simplify-by-decoration --all; }; f"
+  commitdraft = "!f() { git commit -t ~/Notes/cdraft.txt; }; f"
+	d = "difftool"
 
 [difftool]
   prompt = false
+
+[diff]
+	tool = vimdiff
 
 [mergetool]
   prompt = false

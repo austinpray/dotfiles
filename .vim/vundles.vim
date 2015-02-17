@@ -8,12 +8,17 @@ Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
 Plug 'greyblake/vim-preview'
+Plug 'heavenshell/vim-jsdoc'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'mxw/vim-jsx'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'plasticboy/vim-markdown'
+Plug 'reedes/vim-pencil'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-dispatch'
@@ -23,12 +28,10 @@ Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'vim-scripts/argtextobj.vim'
 Plug 'vim-scripts/gitignore'
 Plug 'wikitopian/hardmode'
-Plug 'plasticboy/vim-markdown'
 
 Plug 'digitaltoad/vim-jade',      { 'for': 'jade' }
 Plug 'pangloss/vim-javascript',   { 'for': 'javascript' }
 Plug 'elzr/vim-json',             { 'for': 'json' }
-Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
 Plug 'LaTeX-Box-Team/LaTeX-Box',  { 'for': 'tex' }
 Plug 'ingydotnet/yaml-vim',       { 'for': 'yaml' }
 Plug 'evidens/vim-twig'
@@ -50,12 +53,15 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 let vimpager_disable_ansiesc = 1
 
+let g:jsdoc_default_mapping = 0
+
 let g:vim_markdown_folding_disabled=1
 
 let g:syntastic_mode_map = { 'mode': 'active',
   \ 'active_filetypes': ['javascript'],
   \ 'passive_filetypes': ['html'] }
 let g:syntastic_check_on_open = 1
+let g:syntastic_javascript_checkers = ['jsxhint', 'jscs']
 
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
@@ -69,6 +75,7 @@ let g:unite_source_history_yank_enable = 1
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
 if executable('ag')
+  let g:unite_source_rec_async_ignore_pattern = ''
   let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
 
   " Use ag in unite grep source.
@@ -79,8 +86,9 @@ if executable('ag')
   let g:unite_source_grep_recursive_opt = ''
 endif
 
-nnoremap <C-p>    :Unite -no-split -start-insert file_rec/async<cr>
-nnoremap <space>p :Unite -no-split -start-insert -default-action=vsplit file_rec/async<cr>
+nnoremap <C-p>    :Unite -no-split -start-insert file_rec/git<cr>
+nnoremap <space>p :Unite -no-split -start-insert -default-action=vsplit file_rec/git<cr>
+nnoremap <space><space>p :Unite -no-split -start-insert file_rec/async:!<cr>
 nnoremap <space>/ :Unite -no-split -start-insert grep:.<cr>
 nnoremap <space>y :Unite -no-split -start-insert -buffer-name=yank    history/yank<cr>
 nnoremap <space>e :Unite -no-split -start-insert -buffer-name=buffer  buffer<cr>

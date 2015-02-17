@@ -23,6 +23,7 @@ export TERM="xterm-256color"
 # Path Variables
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -42,10 +43,20 @@ source $(brew --prefix nvm)/nvm.sh
 
 # Aliases
 alias be="bundle exec "
-alias chrome="open /Applications/Google\ Chrome.app "
 alias hsdeploy="bundle exec rake assets:precompile RAILS_ENV=production && git add -A && git commit -a -m 'compiled assets for production, updates manifest file' && git push"
 alias less=$PAGER
 alias zless=$PAGER
 alias pcr="rake assets:precompile RAILS_ENV=production"
 alias sserver="python -m SimpleHTTPServer"
 alias tmux="tmux -2"
+alias chrome='open -a "Google Chrome"'
+alias n='terminal_velocity ~/notes'
+
+
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-*} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}

@@ -78,7 +78,7 @@ set wildignore+=vendor/rails/**
 set wildignore+=vendor/cache/**
 set wildignore+=*.gem
 set wildignore+=log/**
-set wildignore+=tmp/**
+"set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 
 " =============== Paste ============================
@@ -128,3 +128,5 @@ autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 nnoremap <z-a> <C-a>
 nnoremap <z-x> <C-x>
 nnoremap gp `[v`]
+
+nnoremap <F9> :Dispatch<CR>
