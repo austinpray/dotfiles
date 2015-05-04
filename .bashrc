@@ -10,6 +10,7 @@ fi
 
 # Shell Settings
 set -o vi
+ulimit -n 65536 65536 
 
 # Environment Variables
 export CLICOLOR=1
@@ -32,7 +33,7 @@ export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/texbin:$PATH"
 export PATH="~/Library/Haskell/bin:$PATH"
-export PATH="~/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 # Sources
 [ -f /Users/austinpray/.travis/travis.sh ] && source /Users/austinpray/.travis/travis.sh
@@ -43,7 +44,6 @@ source $(brew --prefix nvm)/nvm.sh
 
 # Aliases
 alias be="bundle exec "
-alias hsdeploy="bundle exec rake assets:precompile RAILS_ENV=production && git add -A && git commit -a -m 'compiled assets for production, updates manifest file' && git push"
 alias less=$PAGER
 alias zless=$PAGER
 alias pcr="rake assets:precompile RAILS_ENV=production"

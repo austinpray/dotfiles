@@ -15,6 +15,7 @@ Plug 'greyblake/vim-preview'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'junegunn/vim-easy-align'
 Plug 'michaeljsmith/vim-indent-object'
+Plug 'mikewest/vimroom'
 Plug 'mxw/vim-jsx'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'plasticboy/vim-markdown'
@@ -29,11 +30,13 @@ Plug 'vim-scripts/argtextobj.vim'
 Plug 'vim-scripts/gitignore'
 Plug 'wikitopian/hardmode'
 
+Plug 'kchmck/vim-coffee-script',  { 'for': 'coffee' }
 Plug 'digitaltoad/vim-jade',      { 'for': 'jade' }
 Plug 'pangloss/vim-javascript',   { 'for': 'javascript' }
 Plug 'elzr/vim-json',             { 'for': 'json' }
 Plug 'LaTeX-Box-Team/LaTeX-Box',  { 'for': 'tex' }
 Plug 'ingydotnet/yaml-vim',       { 'for': 'yaml' }
+Plug 'fatih/vim-go',              { 'for': 'go' }
 Plug 'evidens/vim-twig'
 
 call plug#end()
@@ -61,7 +64,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
   \ 'active_filetypes': ['javascript'],
   \ 'passive_filetypes': ['html'] }
 let g:syntastic_check_on_open = 1
-let g:syntastic_javascript_checkers = ['jsxhint', 'jscs']
+let g:syntastic_javascript_checkers = ['jscs']
 
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
@@ -128,3 +131,8 @@ inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
