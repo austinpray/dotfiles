@@ -78,3 +78,4 @@ source ~/dotfiles/.bashrc
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias pubrsa="cat ~/.ssh/id_rsa.pub | pbcopy"
