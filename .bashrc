@@ -17,7 +17,6 @@ export CLICOLOR=1
 export EDITOR="vim"
 export GOPATH=$HOME/go
 export NVM_DIR=~/.nvm
-export PAGER=/usr/local/bin/vimpager
 export PGHOST=localhost
 export TERM="xterm-256color"
 
