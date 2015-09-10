@@ -41,4 +41,16 @@ call plug#begin('~/.vim/plugged')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kien/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'altercation/vim-colors-solarized'
+Plug 'elixir-lang/vim-elixir'
+Plug 'mxw/vim-jsx'
 call plug#end()
+
+" Colors
+set background=dark
+colorscheme solarized
+
+" Ignore
+set wildignore+=*/tmp/*,*/node_modules/*,*.so,*.swp,*.zip
+
