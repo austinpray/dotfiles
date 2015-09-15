@@ -49,7 +49,7 @@ call plug#end()
 
 " Colors
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 
 " Ignore
 set wildignore+=*/tmp/*,*/node_modules/*,*.so,*.swp,*.zip
