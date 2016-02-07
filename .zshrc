@@ -50,7 +50,7 @@ plugins=(git tmux autojump wd)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-source ~/dotfiles/.bashrc
+#source ~/dotfiles/.bashrc
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -79,3 +79,19 @@ source ~/dotfiles/.bashrc
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias pubrsa="cat ~/.ssh/id_rsa.pub | pbcopy"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+export NVM_DIR="/home/austin/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export GOPATH="$HOME/go"
+source $HOME/.gimme/envs/go1.5.env > /dev/null 2>&1
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+alias gpn="gnome-open"
+
+# added by travis gem
+[ -f /home/austin/.travis/travis.sh ] && source /home/austin/.travis/travis.sh
