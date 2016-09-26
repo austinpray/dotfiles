@@ -1,132 +1,96 @@
-" Inspired by
-" https://github.com/skwp/dotfiles/blob/master/vimrc
-" ================ General Config ====================
-
-set nocompatible                " be iMproved, required
-set number                      "Line numbers are good
-set backspace=indent,eol,start  "Allow backspace in insert mode
-set history=1000                "Store lots of :cmdline history
-set showcmd                     "Show incomplete cmds down the bottom
-set showmode                    "Show current mode down the bottom
-set visualbell                  "No sounds
-set autoread                    "Reload files changed outside vim
-set hidden
+" Essential
+set nocompatible
+filetype off
+set visualbell
+set number
 set ruler
+set autoread
 set colorcolumn=80
-set noesckeys
-syntax on
-filetype off                    " required
 
-" =============== Vim-Plug Initialization ===============
-if filereadable(expand("~/dotfiles/.vim/vundles.vim"))
-  source ~/dotfiles/.vim/vundles.vim
-endif
+" Misc
+set laststatus=2
+set nobackup                           " do not keep backups after close
+set nowritebackup                      " do not keep a backup while working
+set noswapfile                         " don't keep swp files either
 
-" ================ Turn Off Swap Files ==============
-
-set noswapfile
-set nobackup
-set nowb
-
-" ================ Persistent Undo ==================
-" Keep undo history across sessions, by storing in file.
-" Only works all the time.
-if has('persistent_undo')
-  silent !mkdir ~/.vim/backups > /dev/null 2>&1
-  set undodir=~/.vim/backups
-  set undofile
-endif
-
-" ================ Indentation ======================
-
+" Spacing
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set backspace=indent,eol,start
+set expandtab
 set autoindent
 set smartindent
 set smarttab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
 
-filetype plugin on
-filetype indent on
-
-let g:html_indent_inctags = "html,body,head,tbody"
-
-" Display tabs and trailing spaces visually
-set list listchars=tab:\ \ ,trail:·
-
-set nowrap       "Don't wrap lines
-set linebreak    "Wrap lines at convenient points
-
-" ================ Folds ============================
-
-set foldmethod=indent   "fold based on indent
-set foldnestmax=3       "deepest fold is 3 levels
-set nofoldenable        "dont fold by default
-
-" ================ Completion =======================
-
-set wildmode=list:longest
-set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
-set wildignore+=*node_modules*
-set wildignore+=*bower_components*
-set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
-set wildignore+=*.gem
-set wildignore+=log/**
-"set wildignore+=tmp/**
-set wildignore+=*.png,*.jpg,*.gif
-
-" =============== Paste ============================
-
-set clipboard=unnamed
-
-" =============== Status Line ======================
-
-set laststatus=2
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
-" ================ Scrolling ========================
-
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=1
-
-" ================== Maps ==========================
-
-" Useful mappings for managing buffers
-map <leader>] :bnext<cr> 
-map <leader>[ :bprev<cr> 
-nnoremap <space>t :tabnew<cr>
-nnoremap <space>] :tabn<cr>
-nnoremap <space>[ :tabp<cr>
-
-nmap <silent> <leader>s :set spell!<CR>
-
-nmap <F2> :update<CR>
-vmap <F2> <Esc><F2>gv
-imap <F2> <c-o><F2>
+" Syntax
+filetype plugin indent on
+syntax enable
 
 " Splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 map <leader>" :sp<CR>
 map <leader>% :vsp<CR>
 
-" ================ Markdown ========================
-autocmd BufRead,BufNewFile *.md set filetype=markdown
+" Plugins
+call plug#begin('~/.vim/plugged')
+Plug 'Valloric/YouCompleteMe'
+Plug 'altercation/vim-colors-solarized'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'guns/vim-sexp'
+Plug 'kien/ctrlp.vim'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'lervag/vimtex'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'mxw/vim-jsx'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+call plug#end()
 
-" Enable spellchecking for Markdown
-autocmd FileType markdown setlocal spell
+" Colors
+set background=dark
+"colorscheme solarized
 
-" Automatically wrap at 80 characters for Markdown
-autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+" Ignore
+set wildignore+=*/tmp/*,*/node_modules/*,*.so,*.swp,*.zip
 
-nnoremap <z-a> <C-a>
-nnoremap <z-x> <C-x>
-nnoremap gp `[v`]
+let g:netrw_altv          = 1
+let g:netrw_fastbrowse    = 2
+let g:netrw_keepdir       = 0
+let g:netrw_retmap        = 1
+let g:netrw_silent        = 1
+let g:netrw_special_syntax= 1
 
-nnoremap <F9> :Dispatch<CR>
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+let g:tex_flavor = 'latex'
+
+if executable('mupdf')
+  let g:vimtex_view_method = 'mupdf'
+endif
