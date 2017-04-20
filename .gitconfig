@@ -24,6 +24,7 @@
   visual = "!f() { gitk --simplify-by-decoration --all; }; f"
   commitdraft = "!f() { git commit -t ~/Notes/cdraft.txt; }; f"
 	d = "difftool"
+	showtrackedignored = ls-files -i --exclude-standard
 
 [difftool]
   prompt = false
@@ -33,3 +34,12 @@
 
 [mergetool]
   prompt = false
+	keepBackup = false
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+
+[include]
+    path = ~/.flynngit

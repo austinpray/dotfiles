@@ -38,7 +38,6 @@ map <leader>% :vsp<CR>
 
 " Plugins
 call plug#begin('~/.vim/plugged')
-Plug 'Valloric/YouCompleteMe'
 Plug 'altercation/vim-colors-solarized'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'editorconfig/editorconfig-vim'
@@ -54,6 +53,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
 call plug#end()
 
 " Colors
