@@ -2,6 +2,8 @@
 .DS_Store
 copy
 
+.rakeTasks
+
 .commitdraft
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
 
@@ -33,6 +35,8 @@ copy
 ## File-based project format:
 *.ipr
 *.iws
+.ideaDataSources
+/dataSources
 
 ## Plugin-specific files:
 

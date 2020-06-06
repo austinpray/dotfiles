@@ -1,39 +1,46 @@
 [user]
-  email = austin@austinpray.com
-  name = Austin Pray
+	email = austin@austinpray.com
+	name = Austin Pray
 
 [core]
-  excludesfile = ~/dotfiles/.gitignore_global
-  editor = vim
+	excludesfile = ~/dotfiles/.gitignore_global
+	editor = vim
+	pager = delta --plus-color="#012800" --minus-color="#340001" --theme='base16'
+	autocrlf = input
+
+[interactive]
+	diffFilter = delta --color-only
 
 [push]
-  default = simple
+	default = simple
 
 [color]
-  ui = true
+	ui = true
 
 [color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red
-  new = blue
+	meta = yellow
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	commit = yellow bold
+	whitespace = red reverse
 
 [alias]
-  delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
-  syncup = "!f() { git checkout --quiet master && git pull upstream master && git push origin master; }; f"
-  visual = "!f() { gitk --simplify-by-decoration --all; }; f"
-  commitdraft = "!f() { git commit -t ~/Notes/cdraft.txt; }; f"
+	delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
+	syncup = "!f() { git checkout --quiet master && git pull upstream master && git push origin master; }; f"
+	visual = "!f() { gitk --simplify-by-decoration --all; }; f"
+	commitdraft = "!f() { git commit -t ~/Notes/cdraft.txt; }; f"
 	d = "difftool"
 	showtrackedignored = ls-files -i --exclude-standard
 
 [difftool]
-  prompt = false
+	prompt = false
 
 [diff]
 	tool = vimdiff
 
 [mergetool]
-  prompt = false
+	prompt = false
 	keepBackup = false
 [filter "lfs"]
 	process = git-lfs filter-process
@@ -41,5 +48,12 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 
-[include]
-    path = ~/.flynngit
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[rerere]
+	enabled = true
+[rebase]
+	autosquash = true

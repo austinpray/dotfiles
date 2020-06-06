@@ -1,14 +1,20 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# Path to your oh-my-zsh installation.
+export ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME=
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -41,16 +47,9 @@ ZSH_THEME="robbyrussell"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux autojump wd)
-
-source $ZSH/oh-my-zsh.sh
+source $HOME/.zsh_plugins.sh
 
 # User configuration
-#source ~/dotfiles/.bashrc
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -78,20 +77,141 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias pubrsa="cat ~/.ssh/id_rsa.pub | pbcopy"
+
+alias pipi='pip install --user'
+
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-export NVM_DIR="/home/austin/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+fpath=(~/.zsh/completions $fpath)
+autoload -U compinit && compinit
+PATH="/usr/local/heroku/bin:$PATH"
 
-export GOPATH="$HOME/go"
-source $HOME/.gimme/envs/go1.5.env > /dev/null 2>&1
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-alias gpn="gnome-open"
+kitty + complete setup zsh | source /dev/stdin
+function pbcopy() {
+  kitty +kitten clipboard $@
+}
+function pbpaste() {
+  kitty +kitten clipboard --get-clipboard
+}
 
 # added by travis gem
-[ -f /home/austin/.travis/travis.sh ] && source /home/austin/.travis/travis.sh
+[ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
+
+alias dc="docker-compose"
+alias dcr="docker-compose run --rm"
+alias dcrn="docker-compose run --no-deps --rm"
+
+alias reboot="sudo systemctl reboot"
+alias poweroff="sudo systemctl poweroff"
+alias susp="sudo systemctl suspend"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+
+webmTOmp4 () {
+      ffmpeg -i "$1".webm -qscale 0 "$1".mp4
+}
+mp4TOmp3 () {
+      ffmpeg -i "$1".mp4 "$1".mp3
+}
+
+makegif () {
+    BN=$(basename $1)
+    GIF="${BN%.*}.gif"
+    GIF_O="${BN%.*}-opt.gif"
+    ffmpeg -i "$1" "$GIF"
+    shift
+    gifsicle -O3 $@ "$GIF" -o "$GIF_O"
+}
+
+function git-branch-current() {
+    printf "%s\n" $(git branch 2> /dev/null | grep -e ^* | tr -d "\* ")
+}
+
+function git-log-last-pushed-hash() {
+    local currentBranch=$(git-branch-current);
+    git log --format="%h" -n 1 origin/${currentBranch}
+}
+
+function git-rebase-unpushed() {
+    git rebase --interactive $(git-log-last-pushed-hash)
+}
+
+function dphp() {
+  NAME=dphp-`date '+%Y-%m-%d-%H-%M'`-`uuidgen -t`
+  docker run -it --rm --name $NAME -v "$PWD":/usr/src/myapp -w /usr/src/myapp php:${1}-cli ${@:2}
+}
+
+function dpython() {
+  NAME=python-`date '+%Y-%m-%d-%H-%M'`-`uuidgen -t`
+  docker run -it --rm --name $NAME -v "$PWD":/app -w /app python $@
+}
+
+function dnode() {
+  NAME=node-`date '+%Y-%m-%d-%H-%M'`-`uuidgen -t`
+  docker run -it --rm --name $NAME -v "$PWD":/usr/src/myapp -w /usr/src/myapp node:${1} ${@:2}
+}
+
+function psysh() {
+  NAME=psysh-`date '+%Y-%m-%d-%H-%M'`-`uuidgen -t`
+  docker run -it --rm --name $NAME -v "$PWD":/app ricc/psysh $@
+}
+
+function composer() {
+  NAME=composer-`date '+%Y-%m-%d-%H-%M'`-`uuidgen -t`
+  docker run -it --rm --name $NAME -v "$PWD":/app composer $@
+}
+
+yq() {
+  docker run --rm -i -v ${PWD}:/workdir mikefarah/yq yq $@
+}
+
+function docker-rmgrep() {
+  docker ps -a | grep $1 | awk '{print $1}'  | xargs docker rm -f
+}
+
+export COMPOSE_HTTP_TIMEOUT=600
+
+# npm
+NPM_PACKAGES="${HOME}/.npm-packages"
+PATH="$NPM_PACKAGES/bin:$PATH"
+unset MANPATH
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+# pip
+PATH="${HOME}/.local/bin:$PATH"
+
+alias icat="kitty +kitten icat"
+alias sc="sc-im"
+alias ld='lazydocker'
+
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
+alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
+
+alias today='vim ~/today.txt'
+
+alias ding="echo -en '\a'"
+
+function kubeon() {
+  RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+}
+
+function kubeoff() {
+  kubectl config unset current-context
+}
+
+alias k=kubectl
+alias kx=kubectx
+alias kn=kubens
+
+autoload -U +X bashcompinit && bashcompinit
+
+if [ -f /usr/bin/terraform ]; then
+complete -o nospace -C /usr/bin/terraform terraform
+fi
+
+alias ll='exa --long --git --header -a'

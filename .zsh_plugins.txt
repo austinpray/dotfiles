@@ -1,0 +1,15 @@
+chrissicool/zsh-256color
+
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+
+wfxr/forgit
+zpm-zsh/clipboard
+
+robbyrussell/oh-my-zsh
+robbyrussell/oh-my-zsh path:plugins/autojump
+
+ergenekonyigit/lambda-gitster
+
+superbrothers/zsh-kubectl-prompt

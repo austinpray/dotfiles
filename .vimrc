@@ -36,27 +36,6 @@ nnoremap <C-H> <C-W><C-H>
 map <leader>" :sp<CR>
 map <leader>% :vsp<CR>
 
-" Plugins
-call plug#begin('~/.vim/plugged')
-Plug 'altercation/vim-colors-solarized'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'guns/vim-sexp'
-Plug 'kien/ctrlp.vim'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'lervag/vimtex'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'mxw/vim-jsx'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-notes'
-call plug#end()
-
 " Colors
 set background=dark
 "colorscheme solarized
