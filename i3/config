@@ -10,11 +10,20 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $alt Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:Source Code Pro 11
-font pango:Meslo LG S, Source Code Pro 11
+#font pango:Meslo LG S, Source Code Pro 11
+font pango:JetBrains Mono 9
+
+# i3-gaps do
+for_window [class=".*"] border pixel 2
+gaps inner 10
+smart_gaps on
+smart_borders on
+# end
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -51,10 +60,12 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left  50 px
+bindsym $mod+Shift+j move down  50 px
+bindsym $mod+Shift+k move up    50 px
+bindsym $mod+Shift+l move right 50 px
+
+bindsym $mod+c move position center
 
 # split in horizontal orientation
 bindsym $mod+Shift+v split h
@@ -123,10 +134,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width  100 px or 10 ppt
+        bindsym j resize grow height   100 px or 10 ppt
+        bindsym k resize shrink height 100 px or 10 ppt
+        bindsym l resize grow width    100 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -149,11 +160,38 @@ bindsym $mod+minus scratchpad show
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-      position top
-      status_command i3status
-}
+#bar {
+#      tray_output primary
+#      position top
+#      status_command SCRIPT_DIR="$HOME/.config/i3/i3blocks-contrib" i3blocks -c "$HOME/.config/i3/i3blocks.conf"
+#}
+
+## screenshots
+bindsym $mod+z exec --no-startup-id deepin-screen-recorder
+bindsym $mod+Shift+z exec --no-startup-id deepin-screen-recorder -f
+
+## clipboard
+
+bindsym $mod+Shift+y exec --no-startup-id xfce4-popup-clipman
+
+## apps
+
+bindsym $mod+Control+$alt+Shift+c exec google-chrome-stable --app='https://calendar.google.com/' --profile-directory='calendar'
+bindsym $mod+Control+$alt+Shift+l exec flatpak run com.slack.Slack
+bindsym $mod+Control+$alt+Shift+v exec pavucontrol
+bindsym $mod+Control+$alt+Shift+e exec exo-open "$HOME/.local/share/applications/jetbrains-idea.desktop"
 
 ## Auto start
+exec --no-startup-id picom --config "$HOME/.config/picom/picom.conf"
+
 exec_always --no-startup-id xsetroot -solid "#002244"
-exec --no-startup-id feh --bg-fill ~/dotfiles/i3/sachiko_wall_tint.png
+exec_always --no-startup-id feh --bg-fill "$HOME/dotfiles/i3/sachiko_wall_tint.png"
+
+exec --no-startup-id polybar -r example
+
+exec --no-startup-id ibus-daemon
+exec --no-startup-id xfce4-clipman
+#exec --no-startup-id pasystray
+exec --no-startup-id systemctl --user start xfce4-notifyd
+exec --no-startup-id redshift-gtk
+#exec --no-startup-id jetbrains-toolbox

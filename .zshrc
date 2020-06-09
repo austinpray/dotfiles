@@ -1,13 +1,41 @@
-# If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+unsetopt BEEP
+
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+export KEYTIMEOUT=1
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/austin/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+eval "$(starship init zsh)"
+
+kitty + complete setup zsh | source /dev/stdin
+function pbcopy() {
+  kitty +kitten clipboard $@
+}
+function pbpaste() {
+  kitty +kitten clipboard --get-clipboard
+}
+
+source "$HOME/.zsh_plugins.sh"
+source "/usr/share/autojump/autojump.zsh"
 
 # Path to your oh-my-zsh installation.
-export ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+#export ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME=
+#ZSH_THEME=
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -47,7 +75,7 @@ ZSH_THEME=
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-source $HOME/.zsh_plugins.sh
+#source $HOME/.zsh_plugins.sh
 
 # User configuration
 
@@ -69,34 +97,10 @@ source $HOME/.zsh_plugins.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+## Personal Aliases
 
 alias pipi='pip install --user'
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
-fpath=(~/.zsh/completions $fpath)
-autoload -U compinit && compinit
-PATH="/usr/local/heroku/bin:$PATH"
-
-kitty + complete setup zsh | source /dev/stdin
-function pbcopy() {
-  kitty +kitten clipboard $@
-}
-function pbpaste() {
-  kitty +kitten clipboard --get-clipboard
-}
-
-# added by travis gem
-[ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
+alias ll='exa --long --git --header -a'
 
 alias dc="docker-compose"
 alias dcr="docker-compose run --rm"
@@ -106,11 +110,27 @@ alias reboot="sudo systemctl reboot"
 alias poweroff="sudo systemctl poweroff"
 alias susp="sudo systemctl suspend"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+alias icat="kitty +kitten icat"
+#alias sc="sc-im"
+#alias ld='lazydocker'
 
-# The next line enables shell command completion for gcloud.
-if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
+alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
+
+alias today='vim ~/today.txt'
+
+alias ding="echo -en '\a'"
+
+alias k=kubectl
+alias kx=kubectx
+alias kn=kubens
+
+alias open=xdg-open
+
+#alias j=autojump
+
+
+# Functions
 
 webmTOmp4 () {
       ffmpeg -i "$1".webm -qscale 0 "$1".mp4
@@ -185,33 +205,36 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 # pip
 PATH="${HOME}/.local/bin:$PATH"
 
-alias icat="kitty +kitten icat"
-alias sc="sc-im"
-alias ld='lazydocker'
-
-alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
-alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
-
-alias today='vim ~/today.txt'
-
-alias ding="echo -en '\a'"
-
 function kubeon() {
-  RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+  kubectx prod1.k8s.carrot.com
 }
 
 function kubeoff() {
   kubectl config unset current-context
 }
 
-alias k=kubectl
-alias kx=kubectx
-alias kn=kubens
-
 autoload -U +X bashcompinit && bashcompinit
 
-if [ -f /usr/bin/terraform ]; then
-complete -o nospace -C /usr/bin/terraform terraform
-fi
+#if [ -f /usr/bin/terraform ]; then
+#complete -o nospace -C /usr/bin/terraform terraform
+#fi
 
-alias ll='exa --long --git --header -a'
+
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
+
+
+#PATH="/usr/local/heroku/bin:$PATH"
+
+# added by travis gem
+#[ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
+
+# The next line updates PATH for the Google Cloud SDK.
+#if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+#if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+if [ -e /home/austin/.nix-profile/etc/profile.d/nix.sh ]; then . /home/austin/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
+export SSH_AUTH_SOCK

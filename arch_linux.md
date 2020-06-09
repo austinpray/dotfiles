@@ -2,6 +2,10 @@
 
 Here's a dump of all my deps 
 
+## 2020-06-07: peko
+
+TODO: get rid of the deepin schemas at some point
+
 ## 2020-06-06: trash ssd
 
 ```
