@@ -57,3 +57,5 @@
 	enabled = true
 [rebase]
 	autosquash = true
+[pull]
+	ff = only
