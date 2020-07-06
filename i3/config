@@ -59,6 +59,8 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
+bindsym $mod+$alt+Shift+Control+j workspace back_and_forth
+
 # move focused window
 bindsym $mod+Shift+h move left  50 px
 bindsym $mod+Shift+j move down  50 px
@@ -126,8 +128,13 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+## Modes
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
         # These bindings trigger as soon as you enter the resize mode
 
         # Pressing left will shrink the window’s width.
@@ -144,27 +151,35 @@ mode "resize" {
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
+
+mode "apps" {
+  bindsym Escape mode "default"
+# intellij
+  bindsym i [class="jetbrains-idea" title="^(?!Services)"] focus
+  bindsym y [class="(?i)google-chrome" title="^(?i).*(YouTube|Google Play Music).*"] focus
+  bindsym l exec flatpak run com.slack.Slack; [class="(?i)slack"] focus
+  bindsym u exec google-chrome-stable --new-window "https://github.com"
+  bindsym o exec google-chrome-stable --new-window "https://github.com/oncarrot"
+  bindsym v exec pavucontrol
+  bindsym c exec google-chrome-stable --app='https://calendar.google.com/' --profile-directory='calendar'
+}
+
+bindsym $mod+Control+$alt+Shift+a mode "apps"
+
+# custom window settings
+for_window [class="(?i)pavucontrol"] floating enable
+for_window [class="(?i)pavucontrol"] resize set 1000 600
+
+for_window [floating] position center
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-#bar {
-#      tray_output primary
-#      position top
-#      status_command SCRIPT_DIR="$HOME/.config/i3/i3blocks-contrib" i3blocks -c "$HOME/.config/i3/i3blocks.conf"
-#}
 
 ## screenshots
 bindsym $mod+z exec --no-startup-id deepin-screen-recorder
@@ -173,13 +188,6 @@ bindsym $mod+Shift+z exec --no-startup-id deepin-screen-recorder -f
 ## clipboard
 
 bindsym $mod+Shift+y exec --no-startup-id xfce4-popup-clipman
-
-## apps
-
-bindsym $mod+Control+$alt+Shift+c exec google-chrome-stable --app='https://calendar.google.com/' --profile-directory='calendar'
-bindsym $mod+Control+$alt+Shift+l exec flatpak run com.slack.Slack
-bindsym $mod+Control+$alt+Shift+v exec pavucontrol
-bindsym $mod+Control+$alt+Shift+e exec exo-open "$HOME/.local/share/applications/jetbrains-idea.desktop"
 
 ## Auto start
 exec --no-startup-id picom --config "$HOME/.config/picom/picom.conf"
