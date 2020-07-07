@@ -1,10 +1,11 @@
+export EDITOR=vim
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 unsetopt BEEP
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 
 export KEYTIMEOUT=1
 bindkey -v
