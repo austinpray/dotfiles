@@ -27,6 +27,13 @@ function pbpaste() {
   kitty +kitten clipboard --get-clipboard
 }
 
+#bindkey -M vicmd '/' history-incremental-search-backward
+bindkey -M vicmd '/' history-incremental-pattern-search-backward
+bindkey '^R' history-incremental-search-backward
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
 source "$HOME/.zsh_plugins.sh"
 source "/usr/share/autojump/autojump.zsh"
 
