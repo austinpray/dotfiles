@@ -176,8 +176,8 @@ autoload -U +X bashcompinit && bashcompinit
 #fi
 
 
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 
 #PATH="/usr/local/heroku/bin:$PATH"
