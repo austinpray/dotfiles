@@ -37,93 +37,34 @@ bindkey '^[[B' history-substring-search-down
 source "$HOME/.zsh_plugins.sh"
 source "/usr/share/autojump/autojump.zsh"
 
-# Path to your oh-my-zsh installation.
-#export ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
-
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME=
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-#source $HOME/.zsh_plugins.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
 ## Personal Aliases
+
+alias be='bundle exec'
+
+alias chrome='google-chrome-stable'
+
 
 alias pipi='pip install --user'
 alias ll='exa --long --git --header -a'
+alias l='exa --long'
 
 alias dc="docker-compose"
 alias dcr="docker-compose run --rm"
 alias dcrn="docker-compose run --no-deps --rm"
+alias dcrn="docker-compose run --no-deps --rm"
+alias dps="docker ps --format 'table {{.Names}}\t{{.ID}}'"
 
 alias reboot="sudo systemctl reboot"
 alias poweroff="sudo systemctl poweroff"
 alias susp="sudo systemctl suspend"
 
 alias icat="kitty +kitten icat"
-#alias sc="sc-im"
-#alias ld='lazydocker'
 
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
+alias branch='git checkout $(git fuzzy branch)'
+alias gfb='git fuzzy branch'
+alias gfl='git fuzzy log'
 
 alias today='vim ~/today.txt'
 
@@ -135,10 +76,13 @@ alias kn=kubens
 
 alias open=xdg-open
 
-#alias j=autojump
-
+alias vi=vim
 
 # Functions
+
+antibodyplugins () {
+  antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
+}
 
 webmTOmp4 () {
       ffmpeg -i "$1".webm -qscale 0 "$1".mp4
@@ -154,6 +98,10 @@ makegif () {
     ffmpeg -i "$1" "$GIF"
     shift
     gifsicle -O3 $@ "$GIF" -o "$GIF_O"
+}
+
+function vvim() {
+  vim $(fzf)
 }
 
 function git-branch-current() {
