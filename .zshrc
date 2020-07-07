@@ -194,3 +194,5 @@ if [ -e /home/austin/.nix-profile/etc/profile.d/nix.sh ]; then . /home/austin/.n
 
 eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
 export SSH_AUTH_SOCK
+
+source $HOME/.poetry/env
