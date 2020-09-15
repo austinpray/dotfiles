@@ -19,13 +19,13 @@ compinit
 
 eval "$(starship init zsh)"
 
-kitty + complete setup zsh | source /dev/stdin
-function pbcopy() {
-  kitty +kitten clipboard $@
-}
-function pbpaste() {
-  kitty +kitten clipboard --get-clipboard
-}
+#kitty + complete setup zsh | source /dev/stdin
+#function pbcopy() {
+#  kitty +kitten clipboard $@
+#}
+#function pbpaste() {
+#  kitty +kitten clipboard --get-clipboard
+#}
 
 #bindkey -M vicmd '/' history-incremental-search-backward
 bindkey -M vicmd '/' history-incremental-pattern-search-backward
@@ -35,7 +35,7 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 source "$HOME/.zsh_plugins.sh"
-source "/usr/share/autojump/autojump.zsh"
+#source "/usr/share/autojump/autojump.zsh"
 
 ## Personal Aliases
 
@@ -177,7 +177,7 @@ autoload -U +X bashcompinit && bashcompinit
 
 
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
 
 
 #PATH="/usr/local/heroku/bin:$PATH"
@@ -192,10 +192,10 @@ eval "$(rbenv init -)"
 #if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 if [ -e /home/austin/.nix-profile/etc/profile.d/nix.sh ]; then . /home/austin/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
-eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
+#eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
 export SSH_AUTH_SOCK
 
-source $HOME/.poetry/env
+#source $HOME/.poetry/env
 
 export PATH="/home/austin/.local/share/git-fuzzy/bin:$PATH"
 
