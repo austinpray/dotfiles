@@ -161,10 +161,6 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 # pip
 PATH="${HOME}/.local/bin:$PATH"
 
-function kubeon() {
-  kubectx prod1.k8s.carrot.com
-}
-
 function kubeoff() {
   kubectl config unset current-context
 }
