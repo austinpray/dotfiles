@@ -25,14 +25,6 @@
 	commit = yellow bold
 	whitespace = red reverse
 
-[alias]
-	delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
-	syncup = "!f() { git checkout --quiet master && git pull upstream master && git push origin master; }; f"
-	visual = "!f() { gitk --simplify-by-decoration --all; }; f"
-	commitdraft = "!f() { git commit -t ~/Notes/cdraft.txt; }; f"
-	d = "difftool"
-	showtrackedignored = ls-files -i --exclude-standard
-
 [difftool]
 	prompt = false
 
