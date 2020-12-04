@@ -1,6 +1,9 @@
+
 export EDITOR=vim
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 unsetopt BEEP
+
+source ~/.gcpdevbox
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -39,6 +42,8 @@ source "$HOME/.zsh_plugins.sh"
 
 ## Personal Aliases
 
+alias mmi='mix github merge-master-into'
+alias bgen='bazel run //:buildgen'
 alias be='bundle exec'
 
 alias chrome='google-chrome-stable'
@@ -208,3 +213,5 @@ if [ -f '/home/austin/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

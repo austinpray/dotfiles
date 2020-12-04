@@ -1,5 +1,6 @@
 zsh-users/zsh-autosuggestions
-Aloxaf/fzf-tab
+#Aloxaf/fzf-tab
 wfxr/forgit
 ytakahashi/igit
 zsh-users/zsh-history-substring-search
+greymd/docker-zsh-completion
