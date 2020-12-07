@@ -1,8 +1,9 @@
 
 export EDITOR=vim
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 unsetopt BEEP
 
+# MXP
 source ~/.gcpdevbox
 
 # Lines configured by zsh-newuser-install
@@ -14,7 +15,7 @@ export KEYTIMEOUT=1
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/austin/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
@@ -106,7 +107,7 @@ makegif () {
 }
 
 function vvim() {
-  vim $(fzf)
+  vim "$(fzf)"
 }
 
 function git-branch-current() {
@@ -155,16 +156,16 @@ function docker-rmgrep() {
   docker ps -a | grep $1 | awk '{print $1}'  | xargs docker rm -f
 }
 
-export COMPOSE_HTTP_TIMEOUT=600
+#export COMPOSE_HTTP_TIMEOUT=600
 
 # npm
-NPM_PACKAGES="${HOME}/.npm-packages"
-PATH="$NPM_PACKAGES/bin:$PATH"
-unset MANPATH
-export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+#NPM_PACKAGES="${HOME}/.npm-packages"
+#PATH="$NPM_PACKAGES/bin:$PATH"
+#unset MANPATH
+#export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # pip
-PATH="${HOME}/.local/bin:$PATH"
+#PATH="${HOME}/.local/bin:$PATH"
 
 function kubeon() {
   kubectx prod1.k8s.carrot.com
@@ -195,23 +196,26 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 
 # The next line enables shell command completion for gcloud.
 #if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
-if [ -e /home/austin/.nix-profile/etc/profile.d/nix.sh ]; then . /home/austin/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+#if [ -e /home/austin/.nix-profile/etc/profile.d/nix.sh ]; then . /home/austin/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 #eval $(systemctl --user show-environment | grep SSH_AUTH_SOCK)
-export SSH_AUTH_SOCK
+#export SSH_AUTH_SOCK
 
 #source $HOME/.poetry/env
 
-export PATH="/home/austin/.local/share/git-fuzzy/bin:$PATH"
+#export PATH="/home/austin/.local/share/git-fuzzy/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/austin/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/austin/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+#if [ -f '/home/austin/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/austin/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/austin/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/austin/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+#if [ -f '/home/austin/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/austin/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

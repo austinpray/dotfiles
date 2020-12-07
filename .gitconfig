@@ -3,7 +3,7 @@
 	name = Austin Pray
 
 [core]
-	excludesfile = ~/dotfiles/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
 	pager = delta --plus-color="#012800" --minus-color="#340001" --theme='base16'
 	autocrlf = input
