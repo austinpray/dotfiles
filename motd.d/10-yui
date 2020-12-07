@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Absolute path to this script
+SCRIPT=$(readlink -f "$0")
+# Absolute path this script is in
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+IMG="$SCRIPT.png"
+
+if [ -f "/home/austinpray/.iterm2/imgcat" ] && [ -f "$IMG" ]
+then
+  printf "\n"
+  /home/austinpray/.iterm2/imgcat $IMG
+elif command -v img2sixel &> /dev/null
+then
+  printf "\n"
+  img2sixel $IMG
+fi
