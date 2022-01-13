@@ -5,11 +5,15 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = vim
-	pager = delta --plus-color="#012800" --minus-color="#340001" --theme='base16'
+	pager = delta
 	autocrlf = input
 
 [interactive]
 	diffFilter = delta --color-only
+
+[delta]
+    features = line-numbers decorations
+    whitespace-error-style = 22 reverse
 
 [push]
 	default = simple
@@ -17,13 +21,13 @@
 [color]
 	ui = true
 
-[color "diff"]
-	meta = yellow
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	commit = yellow bold
-	whitespace = red reverse
+#[color "diff"]
+#	meta = yellow
+#	frag = magenta bold
+#	old = red bold
+#	new = green bold
+#	commit = yellow bold
+#	whitespace = red reverse
 
 [difftool]
 	prompt = false

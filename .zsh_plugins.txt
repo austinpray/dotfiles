@@ -4,3 +4,5 @@ wfxr/forgit
 ytakahashi/igit
 zsh-users/zsh-history-substring-search
 greymd/docker-zsh-completion
+
+~/.local/share/zsh-completions path:completion kind:fpath

@@ -1,6 +1,7 @@
 
 export EDITOR=vim
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 unsetopt BEEP
 
 # MXP
@@ -16,9 +17,6 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename "$HOME/.zshrc"
-
-autoload -Uz compinit
-compinit
 # End of lines added by compinstall
 
 eval "$(starship init zsh)"
@@ -41,8 +39,13 @@ bindkey '^[[B' history-substring-search-down
 source "$HOME/.zsh_plugins.sh"
 #source "/usr/share/autojump/autojump.zsh"
 
+autoload -Uz compinit
+compinit
+
 ## Personal Aliases
 
+alias dbash='docker run --rm -it --entrypoint=bash'
+alias dsh='docker run --rm -it --entrypoint=sh'
 alias mmi='mix github merge-master-into'
 alias bgen='bazel run //:buildgen'
 alias be='bundle exec'
@@ -60,9 +63,13 @@ alias dcrn="docker-compose run --no-deps --rm"
 alias dcrn="docker-compose run --no-deps --rm"
 alias dps="docker ps --format 'table {{.Names}}\t{{.ID}}'"
 
+alias rid='docker run --rm -it -v "$PWD:$PWD" -w "$PWD"'
+
 alias reboot="sudo systemctl reboot"
 alias poweroff="sudo systemctl poweroff"
 alias susp="sudo systemctl suspend"
+
+alias gcrwtf="gcloud container images describe"
 
 alias icat="kitty +kitten icat"
 
@@ -108,6 +115,11 @@ makegif () {
 
 function vvim() {
   vim "$(fzf)"
+}
+
+function gcb() {
+  git fetch
+  git switch --no-track -c $1 origin/master
 }
 
 function git-branch-current() {
@@ -219,3 +231,4 @@ export NVM_DIR="$HOME/.nvm"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+export PATH="$HOME/.poetry/bin:$PATH"
