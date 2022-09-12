@@ -1,5 +1,10 @@
 
+# if [ "$TERM_PROGRAM" = "vscode" ]; then
+#    export EDITOR="code --wait --new-window"
+#else
 export EDITOR=vim
+# fi
+export VISUAL="$EDITOR"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 unsetopt BEEP
@@ -45,6 +50,7 @@ compinit
 ## Personal Aliases
 
 alias dbash='docker run --rm -it --entrypoint=bash'
+alias dsh='docker run --rm -it --entrypoint=sh'
 alias dsh='docker run --rm -it --entrypoint=sh'
 alias mmi='mix github merge-master-into'
 alias bgen='bazel run //:buildgen'
@@ -117,8 +123,8 @@ function vvim() {
   vim "$(fzf)"
 }
 
-function gcb() {
-  git fetch
+function gbr() {
+  git fetch &&\
   git switch --no-track -c $1 origin/master
 }
 
@@ -227,8 +233,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+[ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
+[ -f /usr/share/doc/fzf/examples/completions.zsh ] && source /usr/share/doc/fzf/examples/completions.zsh
