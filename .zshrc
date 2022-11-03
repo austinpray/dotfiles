@@ -9,9 +9,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 unsetopt BEEP
 
-# MXP
-source ~/.gcpdevbox
-
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=10000
@@ -242,3 +239,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f /usr/share/doc/fzf/examples/completions.zsh ] && source /usr/share/doc/fzf/examples/completions.zsh
+
+# MXP
+source ~/.gcpdevbox
+
