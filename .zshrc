@@ -1,3 +1,6 @@
+# BEGIN flag as new block
+source ~/.gcpdevbox
+# END flag as new block
 
 # if [ "$TERM_PROGRAM" = "vscode" ]; then
 #    export EDITOR="code --wait --new-window"
@@ -21,8 +24,6 @@ bindkey -v
 zstyle :compinstall filename "$HOME/.zshrc"
 # End of lines added by compinstall
 
-eval "$(starship init zsh)"
-
 #kitty + complete setup zsh | source /dev/stdin
 #function pbcopy() {
 #  kitty +kitten clipboard $@
@@ -43,6 +44,8 @@ source "$HOME/.zsh_plugins.sh"
 
 autoload -Uz compinit
 compinit
+
+[ -f /usr/share/google-cloud-sdk/completion.zsh.inc ] && source /usr/share/google-cloud-sdk/completion.zsh.inc
 
 ## Personal Aliases
 
@@ -242,4 +245,6 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # MXP
 source ~/.gcpdevbox
+
+eval "$(starship init zsh)"
 
