@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+
+BN=$(basename "$1")
+GIF="${BN%.*}.gif"
+GIF_O="${BN%.*}-opt.gif"
+ffmpeg -i "$1" "$GIF"
+shift
+gifsicle -O3 "$@" "$GIF" -o "$GIF_O"

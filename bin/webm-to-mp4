@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euo pipefail
+
+ffmpeg -i "$1".webm -qscale 0 "$1".mp4

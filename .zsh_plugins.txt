@@ -1,5 +1,0 @@
-zsh-users/zsh-autosuggestions
-Aloxaf/fzf-tab
-wfxr/forgit
-ytakahashi/igit
-zsh-users/zsh-history-substring-search
