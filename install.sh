@@ -72,8 +72,18 @@ else
 fi
 
 ~/.binenv/binenv install starship
+# ~/.binenv/binenv install jq
 ~/.binenv/binenv install gh
 ~/.binenv/binenv install delta
 ~/.binenv/binenv install dust
 
 # ~/.binenv/gh extension install mislav/gh-branch
+
+# Run setup scripts
+# ================
+
+# Arch linux desktop setup
+if command -v pacman &> /dev/null; then
+    ~/dotfiles/scripts/arch-linux.sh
+    ~/dotfiles/scripts/discord.sh
+fi
