@@ -87,3 +87,20 @@ if command -v pacman &> /dev/null; then
     ~/dotfiles/scripts/arch-linux.sh
     ~/dotfiles/scripts/discord.sh
 fi
+
+# Change shell to zsh
+# ===================
+
+if command -v zsh &> /dev/null; then
+    CURRENT_SHELL=$(basename "$SHELL")
+    if [ "$CURRENT_SHELL" != "zsh" ]; then
+        ZSH_PATH=$(which zsh)
+        echo "Changing default shell to zsh ($ZSH_PATH)..."
+        chsh -s "$ZSH_PATH"
+        echo "Shell changed to zsh. You'll need to log out and back in for the change to take effect."
+    else
+        echo "Default shell is already zsh"
+    fi
+else
+    echo "zsh is not installed, skipping shell change"
+fi
