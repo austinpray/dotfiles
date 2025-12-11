@@ -87,3 +87,7 @@ if command -v pacman &> /dev/null; then
     ~/dotfiles/scripts/arch-linux.sh
     ~/dotfiles/scripts/discord.sh
 fi
+
+if ! command -v claude &> /dev/null; then
+    curl -fsSL https://claude.ai/install.sh | bash 
+fi
