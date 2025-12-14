@@ -3,6 +3,7 @@ set -euo pipefail
 
 PACKAGES=(
     openssh
+    wl-clipboard
 )
 
 # Fonts
