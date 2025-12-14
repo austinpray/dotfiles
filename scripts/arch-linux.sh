@@ -1,7 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
-PACKAGES=()
+PACKAGES=(
+    openssh
+)
 
 # Fonts
 # =====
