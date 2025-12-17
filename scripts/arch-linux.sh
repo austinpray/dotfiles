@@ -57,3 +57,16 @@ if command -v zsh &> /dev/null; then
 else
     echo "zsh is not installed, skipping shell change"
 fi
+
+# Enable SSH Agent Service
+# ========================
+
+echo "Configuring SSH agent service..."
+if systemctl --user is-enabled ssh-agent.service &> /dev/null; then
+    echo "ssh-agent.service is already enabled"
+else
+    echo "Enabling ssh-agent.service..."
+    systemctl --user enable ssh-agent.service
+    systemctl --user start ssh-agent.service
+    echo "ssh-agent.service enabled and started"
+fi
