@@ -7,6 +7,7 @@ PACKAGES=(
     polkit
     lxqt-policykit
     rsync
+    uv
 )
 
 # Fonts
