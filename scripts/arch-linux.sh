@@ -4,6 +4,9 @@ set -euo pipefail
 PACKAGES=(
     openssh
     wl-clipboard
+    polkit
+    lxqt-policykit
+    rsync
 )
 
 # Fonts
