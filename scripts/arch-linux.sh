@@ -73,3 +73,23 @@ else
     systemctl --user start ssh-agent.service
     echo "ssh-agent.service enabled and started"
 fi
+
+# Symlink Sway Config
+# ===================
+
+if command -v sway &> /dev/null; then
+    DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+    SWAY_CONFIG_SRC="$DOTFILES_DIR/.config/sway/config"
+    SWAY_CONFIG_DEST="$HOME/.config/sway/config"
+
+    if [ -L "$SWAY_CONFIG_DEST" ] && [ "$(readlink "$SWAY_CONFIG_DEST")" = "$SWAY_CONFIG_SRC" ]; then
+        echo "Sway config symlink already exists"
+    else
+        echo "Creating sway config symlink..."
+        mkdir -p "$(dirname "$SWAY_CONFIG_DEST")"
+        ln -sf "$SWAY_CONFIG_SRC" "$SWAY_CONFIG_DEST"
+        echo "Sway config symlinked"
+    fi
+else
+    echo "sway is not installed, skipping config symlink"
+fi
