@@ -8,6 +8,7 @@ PACKAGES=(
     lxqt-policykit
     rsync
     uv
+    podman
 )
 
 # Fonts
