@@ -2,13 +2,13 @@
 set -euo pipefail
 
 PACKAGES=(
-    openssh
-    wl-clipboard
-    polkit
     lxqt-policykit
+    openssh
+    podman
+    polkit
     rsync
     uv
-    podman
+    wl-clipboard
 )
 
 # Fonts
