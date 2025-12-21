@@ -95,3 +95,29 @@ if command -v sway &> /dev/null; then
 else
     echo "sway is not installed, skipping config symlink"
 fi
+
+# Configure Podman Registries
+# ===========================
+
+PODMAN_REGISTRY_CONF="/etc/containers/registries.conf.d/10-unqualified-search-registries.conf"
+EXPECTED_CONTENT='unqualified-search-registries = ["docker.io"]'
+
+if [ -f "$PODMAN_REGISTRY_CONF" ]; then
+    echo "Podman registry config already exists"
+else
+    echo "Configuring Podman registries..."
+    sudo mkdir -p "$(dirname "$PODMAN_REGISTRY_CONF")"
+    echo "$EXPECTED_CONTENT" | sudo tee "$PODMAN_REGISTRY_CONF" > /dev/null
+    echo "Podman registries configured"
+fi
+
+# Authenticate Podman with GitHub Container Registry
+# ===================================================
+
+if command -v gh &> /dev/null && gh auth status &> /dev/null; then
+    echo "Authenticating Podman with GitHub Container Registry..."
+    gh auth token | podman login ghcr.io -u austinpray --password-stdin
+    echo "Podman authenticated with ghcr.io"
+else
+    echo "GitHub CLI not authenticated, skipping ghcr.io login"
+fi
