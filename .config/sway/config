@@ -237,4 +237,4 @@ bar {
 include /etc/sway/config.d/*
 
 exec /usr/bin/lxpolkit
-
+exec_always nm-applet --indicator

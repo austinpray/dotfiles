@@ -4,6 +4,7 @@ set -euo pipefail
 PACKAGES=(
     just
     lxqt-policykit
+    network-manager-applet
     openssh
     podman
     polkit
