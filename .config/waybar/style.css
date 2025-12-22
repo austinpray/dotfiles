@@ -1,0 +1,46 @@
+@import "mocha.css";
+
+* {
+  font-family: FantasqueSansMono Nerd Font;
+  font-size: 12px;
+  min-height: 0;
+}
+
+#waybar {
+  background: transparent;
+  color: @text;
+  margin: 5px 5px;
+}
+
+#workspaces, .modules-right {
+  border-radius: 1rem;
+  margin: 5px;
+  background-color: @surface0;
+}
+
+#workspaces button {
+  color: @lavender;
+  border-radius: 1rem;
+  padding: 0.4rem;
+}
+
+#workspaces button.active {
+  color: @sky;
+  background-color: @surface1;
+  border-radius: 1rem;
+}
+
+#workspaces button:hover {
+  color: @sapphire;
+  border-radius: 1rem;
+}
+
+.module {
+    margin: 0 calc(1rem / (1.62*2));
+}
+#pulseaudio {
+    padding-left: calc(1rem / (1.62*2));
+}
+#clock {
+    padding-right: calc(1rem / (1.62*2));
+}
