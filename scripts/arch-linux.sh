@@ -6,10 +6,12 @@ PACKAGES=(
     lxqt-policykit
     network-manager-applet
     openssh
+    otf-font-awesome
     podman
     polkit
     rsync
     uv
+    waybar
     wl-clipboard
 )
 
@@ -96,6 +98,26 @@ if command -v sway &> /dev/null; then
     fi
 else
     echo "sway is not installed, skipping config symlink"
+fi
+
+# Symlink Waybar Config
+# =====================
+
+if command -v waybar &> /dev/null; then
+    DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+    WAYBAR_CONFIG_SRC="$DOTFILES_DIR/.config/waybar"
+    WAYBAR_CONFIG_DEST="$HOME/.config/waybar"
+
+    if [ -L "$WAYBAR_CONFIG_DEST" ] && [ "$(readlink "$WAYBAR_CONFIG_DEST")" = "$WAYBAR_CONFIG_SRC" ]; then
+        echo "Waybar config symlink already exists"
+    else
+        echo "Creating waybar config symlink..."
+        mkdir -p "$(dirname "$WAYBAR_CONFIG_DEST")"
+        ln -sf "$WAYBAR_CONFIG_SRC" "$WAYBAR_CONFIG_DEST"
+        echo "Waybar config symlinked"
+    fi
+else
+    echo "waybar is not installed, skipping config symlink"
 fi
 
 # Configure Podman Registries
