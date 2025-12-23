@@ -17,6 +17,17 @@ PACKAGES=(
     wl-clipboard
 )
 
+# Desktop apps
+# ============
+# PACKAGES+=(
+#     blender
+# )
+
+# # AMD GPU support
+# if lspci | grep -iE 'vga.*amd|vga.*ati|display.*amd' &> /dev/null; then
+#     PACKAGES+=(hip-runtime-amd)
+# fi
+
 # Fonts
 # =====
 # Emoji
