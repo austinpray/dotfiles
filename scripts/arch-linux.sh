@@ -9,6 +9,8 @@ PACKAGES=(
     otf-font-awesome
     podman
     polkit
+    qemu-user-static
+    qemu-user-static-binfmt
     rsync
     uv
     waybar
