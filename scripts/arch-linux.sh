@@ -14,6 +14,7 @@ PACKAGES=(
     rsync
     uv
     waybar
+    wireless-regdb
     wl-clipboard
 )
 
@@ -158,4 +159,21 @@ if command -v gh &> /dev/null && gh auth status &> /dev/null; then
     echo "Podman authenticated with ghcr.io"
 else
     echo "GitHub CLI not authenticated, skipping ghcr.io login"
+fi
+
+# Configure Wireless Regulatory Domain
+# ====================================
+
+WIRELESS_REGDOM_CONF="/etc/conf.d/wireless-regdom"
+
+if [ -f "$WIRELESS_REGDOM_CONF" ]; then
+    if grep -q '^WIRELESS_REGDOM="US"' "$WIRELESS_REGDOM_CONF"; then
+        echo "US wireless regulatory domain already configured"
+    else
+        echo "Configuring US wireless regulatory domain..."
+        sudo sed -i 's/^#WIRELESS_REGDOM="US"/WIRELESS_REGDOM="US"/' "$WIRELESS_REGDOM_CONF"
+        echo "US wireless regulatory domain configured (reboot required)"
+    fi
+else
+    echo "wireless-regdom config not found, skipping regdom configuration"
 fi
