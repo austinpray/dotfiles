@@ -2,6 +2,7 @@
 set -euo pipefail
 
 PACKAGES=(
+    brightnessctl
     just
     lxqt-policykit
     network-manager-applet
