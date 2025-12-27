@@ -228,4 +228,5 @@ bar {
 include /etc/sway/config.d/*
 
 exec /usr/bin/lxpolkit
+exec opensnitch-ui --background
 exec_always nm-applet --indicator

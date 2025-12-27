@@ -21,9 +21,11 @@ PACKAGES=(
 
 # Desktop apps
 # ============
-# PACKAGES+=(
-#     blender
-# )
+PACKAGES+=(
+    # blender
+    opensnitch
+    qt5-wayland
+)
 
 # # AMD GPU support
 # if lspci | grep -iE 'vga.*amd|vga.*ati|display.*amd' &> /dev/null; then
@@ -177,4 +179,16 @@ if [ -f "$WIRELESS_REGDOM_CONF" ]; then
     fi
 else
     echo "wireless-regdom config not found, skipping regdom configuration"
+fi
+
+# Enable OpenSnitch Daemon
+# ========================
+
+echo "Configuring OpenSnitch daemon..."
+if systemctl is-enabled opensnitchd.service &> /dev/null; then
+    echo "opensnitchd.service is already enabled"
+else
+    echo "Enabling opensnitchd.service..."
+    sudo systemctl enable --now opensnitchd.service
+    echo "opensnitchd.service enabled and started"
 fi
