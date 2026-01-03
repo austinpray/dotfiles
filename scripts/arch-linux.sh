@@ -12,6 +12,7 @@ PACKAGES=(
     polkit
     qemu-user-static
     qemu-user-static-binfmt
+    recutils
     rsync
     uv
     waybar
