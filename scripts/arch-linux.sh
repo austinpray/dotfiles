@@ -51,7 +51,7 @@ echo "Checking Arch Linux packages..."
 TO_INSTALL=()
 
 for package in "${PACKAGES[@]}"; do
-    if pacman -Qi "$package" &> /dev/null; then
+    if paru -Qi "$package" &> /dev/null; then
         echo "$package is already installed"
     else
         echo "$package needs to be installed"
@@ -61,7 +61,7 @@ done
 
 if [ ${#TO_INSTALL[@]} -gt 0 ]; then
     echo "Installing ${#TO_INSTALL[@]} package(s)..."
-    sudo pacman -S --noconfirm "${TO_INSTALL[@]}"
+    paru -S --noconfirm "${TO_INSTALL[@]}"
     echo "Installation complete"
 else
     echo "All packages already installed"
