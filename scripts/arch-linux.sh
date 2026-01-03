@@ -26,6 +26,7 @@ PACKAGES+=(
     # blender
     opensnitch
     qt5-wayland
+    screengrab
 )
 
 # # AMD GPU support
