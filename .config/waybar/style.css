@@ -24,7 +24,7 @@
   padding: 0.4rem;
 }
 
-#workspaces button.active {
+#workspaces button.focused {
   color: @sky;
   background-color: @surface1;
   border-radius: 1rem;
