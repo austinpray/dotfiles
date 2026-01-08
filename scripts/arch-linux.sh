@@ -8,7 +8,11 @@ PACKAGES=(
     network-manager-applet
     openssh
     otf-font-awesome
+    docker
+    docker-buildx
+    docker-compose
     podman
+    podman-compose
     polkit
     qemu-user-static
     qemu-user-static-binfmt
