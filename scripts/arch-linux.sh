@@ -19,7 +19,6 @@ PACKAGES=(
     recutils
     rsync
     uv
-    waybar
     wireless-regdb
     wl-clipboard
 )
@@ -31,6 +30,14 @@ PACKAGES+=(
     opensnitch
     qt5-wayland
     screengrab
+)
+
+# Sway
+# ====
+PACKAGES+=(
+    swayidle
+    swaylock
+    waybar
 )
 
 # # AMD GPU support
