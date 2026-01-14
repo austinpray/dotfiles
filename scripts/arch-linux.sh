@@ -8,6 +8,7 @@ PACKAGES=(
     network-manager-applet
     openssh
     otf-font-awesome
+    python-pip
     docker
     docker-buildx
     docker-compose
@@ -35,9 +36,19 @@ PACKAGES+=(
 # Sway
 # ====
 PACKAGES+=(
+    mako
     swayidle
     swaylock
     waybar
+)
+
+# Speech Recognition
+# ==================
+PACKAGES+=(
+    hyprwhspr
+    python-gobject
+    gtk4
+    gtk4-layer-shell
 )
 
 # # AMD GPU support
@@ -58,6 +69,22 @@ PACKAGES+=(
     ttf-arphic-uming
     ttf-indic-otf
 )
+
+# Replace PulseAudio with PipeWire
+# =================================
+
+if paru -Qi pulseaudio &> /dev/null; then
+    echo "Replacing pulseaudio with pipewire-pulse..."
+    paru -Rdd --noconfirm pulseaudio
+    paru -S --noconfirm pipewire-pulse
+    echo "Replaced pulseaudio with pipewire-pulse"
+elif paru -Qi pipewire-pulse &> /dev/null; then
+    echo "pipewire-pulse is already installed"
+else
+    echo "Installing pipewire-pulse..."
+    paru -S --noconfirm pipewire-pulse
+    echo "pipewire-pulse installed"
+fi
 
 echo "Checking Arch Linux packages..."
 
