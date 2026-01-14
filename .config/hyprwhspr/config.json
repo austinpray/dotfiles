@@ -12,7 +12,11 @@
   "model": "medium.en",
   "threads": 4,
   "language": null,
-  "word_overrides": {},
+  "word_overrides": {
+    "claud.md": "CLAUDE.md",
+    "Claude MD": "CLAUDE.md",
+    "Claude.MD": "CLAUDE.md"
+  },
   "whisper_prompt": "Transcribe with proper capitalization, including sentence beginnings, proper nouns, titles, and standard English capitalization rules.",
   "clipboard_behavior": false,
   "clipboard_clear_delay": 5.0,
