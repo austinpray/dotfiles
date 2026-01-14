@@ -58,6 +58,11 @@ PACKAGES+=(
 
 # Fonts
 # =====
+# Nerd Fonts
+PACKAGES+=(
+    ttf-jetbrains-mono-nerd
+)
+
 # Emoji
 PACKAGES+=(
     noto-fonts-emoji

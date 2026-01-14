@@ -2,8 +2,8 @@
 @import "mocha.css";
 
 * {
-  font-family: FantasqueSansMono Nerd Font;
-  font-size: 12px;
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 13px;
   min-height: 0;
 }
 
@@ -44,4 +44,7 @@
 }
 #clock {
     padding-right: calc(1rem / (1.62*2));
+}
+#custom-hyprwhspr {
+    margin-right: 0;
 }
