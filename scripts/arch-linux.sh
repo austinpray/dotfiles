@@ -49,6 +49,8 @@ PACKAGES+=(
     python-gobject
     gtk4
     gtk4-layer-shell
+    wtype
+    handy-bin
 )
 
 # # AMD GPU support
