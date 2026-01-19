@@ -1,14 +1,14 @@
 ---
-description: Train dictation word overrides for hyprwhspr
+description: Train dictation word overrides for Handy
 argument-hint: <correct-word>
 ---
 
 # Word Override Training
 
-The user wants to add a word override for: **$ARGUMENTS**
+The user wants to add a custom word for: **$ARGUMENTS**
 
-Current word_overrides in the config:
-@.config/hyprwhspr/config.json
+Current custom_words in the config:
+@.local/share/com.pais.handy/settings_store.json
 
 ## Workflow
 
@@ -26,11 +26,11 @@ Current word_overrides in the config:
 
 2. Present the sentences to the user and ask them to read each one aloud using their dictation software.
 
-3. After the user provides the transcribed results, identify the incorrect transcription(s) for "$ARGUMENTS".
+3. After the user provides the transcribed results, check if "$ARGUMENTS" is being transcribed correctly.
 
-4. Add entries to the `word_overrides` object in `.config/hyprwhspr/config.json` mapping each incorrect transcription to the correct word "$ARGUMENTS".
+4. If not already present, add "$ARGUMENTS" to the `custom_words` array in `.local/share/com.pais.handy/settings_store.json`.
 
 ## Important Notes
-- The word_overrides format is: `"incorrect_transcription": "correct_word"`
-- Multiple incorrect transcriptions can map to the same correct word
-- Preserve existing overrides when adding new ones
+- The custom_words format is a simple array of strings: `["word1", "word2"]`
+- These words help the speech recognition model correctly transcribe specific terms
+- Preserve existing custom words when adding new ones
