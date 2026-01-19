@@ -77,6 +77,12 @@ PACKAGES+=(
     ttf-indic-otf
 )
 
+# Packages to remove (declarative uninstall)
+# ==========================================
+REMOVE_PACKAGES=(
+    # Add packages here that should be removed
+)
+
 # Replace PulseAudio with PipeWire
 # =================================
 
@@ -112,6 +118,31 @@ if [ ${#TO_INSTALL[@]} -gt 0 ]; then
     echo "Installation complete"
 else
     echo "All packages already installed"
+fi
+
+# Remove unwanted packages
+# ========================
+
+if [ ${#REMOVE_PACKAGES[@]} -gt 0 ]; then
+    echo "Checking packages to remove..."
+    TO_REMOVE=()
+
+    for package in "${REMOVE_PACKAGES[@]}"; do
+        if paru -Qe "$package" &> /dev/null; then
+            echo "$package is explicitly installed, will remove"
+            TO_REMOVE+=("$package")
+        else
+            echo "$package is not explicitly installed, skipping"
+        fi
+    done
+
+    if [ ${#TO_REMOVE[@]} -gt 0 ]; then
+        echo "Removing ${#TO_REMOVE[@]} package(s)..."
+        paru -Rs --noconfirm "${TO_REMOVE[@]}"
+        echo "Removal complete"
+    else
+        echo "No packages to remove"
+    fi
 fi
 
 # Change shell to zsh
