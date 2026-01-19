@@ -24,7 +24,6 @@ Run `./install.sh` from the dotfiles directory to:
 **Key config locations**:
 - `.config/sway/config` - Sway window manager
 - `.config/waybar/config.jsonc` - Status bar
-- `.config/hyprwhspr/config.json` - Speech-to-text
 - `.config/mako/config` - Notifications
 
 **Scripts**:

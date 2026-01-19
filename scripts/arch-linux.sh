@@ -45,10 +45,6 @@ PACKAGES+=(
 # Speech Recognition
 # ==================
 PACKAGES+=(
-    hyprwhspr
-    python-gobject
-    gtk4
-    gtk4-layer-shell
     wtype
     handy-bin
 )
@@ -80,7 +76,10 @@ PACKAGES+=(
 # Packages to remove (declarative uninstall)
 # ==========================================
 REMOVE_PACKAGES=(
-    # Add packages here that should be removed
+    hyprwhspr
+    python-gobject
+    gtk4
+    gtk4-layer-shell
 )
 
 # Replace PulseAudio with PipeWire

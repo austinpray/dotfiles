@@ -1,4 +1,3 @@
-@import "/usr/lib/hyprwhspr/config/waybar/hyprwhspr-style.css";
 @import "mocha.css";
 
 * {
@@ -44,7 +43,4 @@
 }
 #clock {
     padding-right: calc(1rem / (1.62*2));
-}
-#custom-hyprwhspr {
-    margin-right: 0;
 }

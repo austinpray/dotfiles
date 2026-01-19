@@ -216,8 +216,6 @@ bindsym $mod+r mode "resize"
 
     bindsym --locked XF86AudioPlay exec pkill -USR2 -n handy
     bindsym --locked $alt+space exec pkill -USR2 -n handy
-    # Hyprwhspr speech-to-text toggle
-    # bindsym $mod+Mod1+d exec /usr/lib/hyprwhspr/config/hyprland/hyprwhspr-tray.sh record
 
 #
 # Status Bar:
