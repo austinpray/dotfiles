@@ -173,7 +173,7 @@
         "\uf028"
       ]
     },
-    "on-click": "pavucontrol"
+    "on-click": "pwvucontrol"
   },
   "custom/media": {
     "format": "{icon} {text}",

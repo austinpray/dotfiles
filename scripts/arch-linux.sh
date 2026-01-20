@@ -28,7 +28,9 @@ PACKAGES=(
 # ============
 PACKAGES+=(
     # blender
+    cable
     opensnitch
+    pwvucontrol
     qt5-wayland
     screengrab
 )
@@ -77,6 +79,7 @@ PACKAGES+=(
 # ==========================================
 REMOVE_PACKAGES=(
     hyprwhspr
+    pavucontrol
     python-gobject
     gtk4
     gtk4-layer-shell
