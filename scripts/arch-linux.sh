@@ -29,10 +29,16 @@ PACKAGES=(
 PACKAGES+=(
     # blender
     cable
+    grim
     opensnitch
+    pinta
+    pngquant
     pwvucontrol
     qt5-wayland
     screengrab
+    slurp
+    swappy
+    wl-clipboard
 )
 
 # Sway
