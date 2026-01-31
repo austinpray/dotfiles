@@ -28,10 +28,12 @@
       "CLAUDE.md"
     ],
     "debug_mode": false,
+    "experimental_enabled": false,
     "history_limit": 5,
+    "keyboard_implementation": "tauri",
     "log_level": "debug",
     "model_unload_timeout": "never",
-    "mute_while_recording": false,
+    "mute_while_recording": true,
     "overlay_position": "none",
     "paste_method": "direct",
     "post_process_api_keys": {
@@ -111,7 +113,7 @@
     "selected_model": "parakeet-tdt-0.6b-v3",
     "selected_output_device": null,
     "sound_theme": "marimba",
-    "start_hidden": false,
+    "start_hidden": true,
     "translate_to_english": false,
     "update_checks_enabled": true,
     "word_correction_threshold": 0.18
