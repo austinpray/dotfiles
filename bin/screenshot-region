@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 
+mkdir -p ~/screenshots
 grim -g "$(slurp)" - \
 | swappy -f - -o - \
 | pngquant - \
+| tee ~/screenshots/screen-"$(date +%Y-%m-%d_%H-%M-%S)".png \
 | wl-copy -t image/png
