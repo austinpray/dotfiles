@@ -3,22 +3,24 @@ set -euo pipefail
 
 PACKAGES=(
     brightnessctl
+    bubblewrap
+    docker
+    docker-buildx
+    docker-compose
     just
     lxqt-policykit
     network-manager-applet
     openssh
     otf-font-awesome
-    python-pip
-    docker
-    docker-buildx
-    docker-compose
     podman
     podman-compose
     polkit
+    python-pip
     qemu-user-static
     qemu-user-static-binfmt
     recutils
     rsync
+    socat
     uv
     wireless-regdb
     wl-clipboard
