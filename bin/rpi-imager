@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+exec sudo WAYLAND_DISPLAY="$WAYLAND_DISPLAY" XDG_RUNTIME_DIR="$XDG_RUNTIME_DIR" QT_QPA_PLATFORM=wayland /usr/bin/rpi-imager "$@"
