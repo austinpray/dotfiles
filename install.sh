@@ -7,7 +7,7 @@ cd ~
 # ================
 
 DOTFILES_DIR="$HOME/dotfiles"
-DOTFILES=(.gitconfig .gitignore_global .vimrc .zshrc .config/starship.toml .config/containers/containers.conf .config/mako/config .local/share/com.pais.handy/settings_store.json)
+DOTFILES=(.gitconfig .gitignore_global .vimrc .zshrc .config/starship.toml .config/containers/containers.conf .config/mako/config .config/gammastep/config.ini .local/share/com.pais.handy/settings_store.json)
 
 # Symlink dotfiles to home directory
 for file in "${DOTFILES[@]}"; do

@@ -57,6 +57,12 @@ PACKAGES+=(
     handy-bin
 )
 
+# Screen color temperature
+# ========================
+PACKAGES+=(
+    gammastep
+)
+
 # # AMD GPU support
 # if lspci | grep -iE 'vga.*amd|vga.*ati|display.*amd' &> /dev/null; then
 #     PACKAGES+=(hip-runtime-amd)
@@ -277,4 +283,16 @@ else
     echo "Enabling opensnitchd.service..."
     sudo systemctl enable --now opensnitchd.service
     echo "opensnitchd.service enabled and started"
+fi
+
+# Enable Gammastep Indicator Service
+# ==================================
+
+echo "Configuring Gammastep indicator service..."
+if systemctl --user is-enabled gammastep-indicator.service &> /dev/null; then
+    echo "gammastep-indicator.service is already enabled"
+else
+    echo "Enabling gammastep-indicator.service..."
+    systemctl --user enable --now gammastep-indicator.service
+    echo "gammastep-indicator.service enabled and started"
 fi
