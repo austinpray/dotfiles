@@ -7,10 +7,14 @@ PACKAGES=(
     docker
     docker-buildx
     docker-compose
+    dkms
     just
+    linux-headers
     lxqt-policykit
     network-manager-applet
+    mosh
     openssh
+    tmux
     otf-font-awesome
     podman
     podman-compose
@@ -19,6 +23,7 @@ PACKAGES=(
     qemu-user-static
     qemu-user-static-binfmt
     recutils
+    r8152-dkms
     rsync
     socat
     uv
@@ -65,6 +70,13 @@ PACKAGES+=(
     gammastep
 )
 
+# Network tools
+# =============
+PACKAGES+=(
+    ethtool
+    ookla-speedtest-bin
+)
+
 # # AMD GPU support
 # if lspci | grep -iE 'vga.*amd|vga.*ati|display.*amd' &> /dev/null; then
 #     PACKAGES+=(hip-runtime-amd)
@@ -97,6 +109,7 @@ REMOVE_PACKAGES=(
     python-gobject
     gtk4
     gtk4-layer-shell
+    speedtest-cli
 )
 
 # Replace PulseAudio with PipeWire
@@ -113,27 +126,6 @@ else
     echo "Installing pipewire-pulse..."
     paru -S --noconfirm pipewire-pulse
     echo "pipewire-pulse installed"
-fi
-
-echo "Checking Arch Linux packages..."
-
-TO_INSTALL=()
-
-for package in "${PACKAGES[@]}"; do
-    if paru -Qi "$package" &> /dev/null; then
-        echo "$package is already installed"
-    else
-        echo "$package needs to be installed"
-        TO_INSTALL+=("$package")
-    fi
-done
-
-if [ ${#TO_INSTALL[@]} -gt 0 ]; then
-    echo "Installing ${#TO_INSTALL[@]} package(s)..."
-    paru -S --noconfirm "${TO_INSTALL[@]}"
-    echo "Installation complete"
-else
-    echo "All packages already installed"
 fi
 
 # Remove unwanted packages
@@ -159,6 +151,27 @@ if [ ${#REMOVE_PACKAGES[@]} -gt 0 ]; then
     else
         echo "No packages to remove"
     fi
+fi
+
+echo "Checking Arch Linux packages..."
+
+TO_INSTALL=()
+
+for package in "${PACKAGES[@]}"; do
+    if paru -Qi "$package" &> /dev/null; then
+        echo "$package is already installed"
+    else
+        echo "$package needs to be installed"
+        TO_INSTALL+=("$package")
+    fi
+done
+
+if [ ${#TO_INSTALL[@]} -gt 0 ]; then
+    echo "Installing ${#TO_INSTALL[@]} package(s)..."
+    paru -S --noconfirm "${TO_INSTALL[@]}"
+    echo "Installation complete"
+else
+    echo "All packages already installed"
 fi
 
 # Change shell to zsh
@@ -273,6 +286,42 @@ if [ -f "$WIRELESS_REGDOM_CONF" ]; then
     fi
 else
     echo "wireless-regdom config not found, skipping regdom configuration"
+fi
+
+# Deploy SSH Server Config
+# ========================
+
+DOTFILES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+SSHD_CONFIG_SRC="$DOTFILES_DIR/etc/ssh/sshd_config"
+SSHD_CONFIG_DEST="/etc/ssh/sshd_config"
+
+echo "Deploying sshd_config..."
+if [ -f "$SSHD_CONFIG_DEST" ] && diff -q "$SSHD_CONFIG_SRC" "$SSHD_CONFIG_DEST" &> /dev/null; then
+    echo "sshd_config is already up to date"
+else
+    sudo cp "$SSHD_CONFIG_SRC" "$SSHD_CONFIG_DEST"
+    echo "sshd_config deployed to $SSHD_CONFIG_DEST"
+fi
+
+# Remove weak DH moduli (require >= 3072-bit)
+if [ -f /etc/ssh/moduli ]; then
+    if awk '$5 < 3071 { found=1; exit } END { exit !found }' /etc/ssh/moduli 2>/dev/null; then
+        echo "Removing weak Diffie-Hellman moduli..."
+        awk '$5 >= 3071' /etc/ssh/moduli | sudo tee /etc/ssh/moduli.tmp > /dev/null
+        sudo mv /etc/ssh/moduli.tmp /etc/ssh/moduli
+        echo "Weak moduli removed"
+    else
+        echo "DH moduli already hardened"
+    fi
+fi
+
+# Ensure sshd is disabled (use ssh-start/ssh-end for on-demand access)
+if systemctl is-enabled sshd.service &> /dev/null; then
+    echo "Disabling sshd.service (use ssh-start/ssh-end for on-demand access)..."
+    sudo systemctl disable sshd.service
+    echo "sshd.service disabled"
+else
+    echo "sshd.service is already disabled"
 fi
 
 # Enable OpenSnitch Daemon
