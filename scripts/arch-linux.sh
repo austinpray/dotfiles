@@ -324,6 +324,22 @@ else
     echo "sshd.service is already disabled"
 fi
 
+# Deploy NetworkManager Dispatcher: WiFi/Wired Exclusive
+# ======================================================
+
+NM_DISPATCH_SRC="$DOTFILES_DIR/etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh"
+NM_DISPATCH_DEST="/etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh"
+
+echo "Deploying NetworkManager WiFi/wired-exclusive dispatcher..."
+if [ -f "$NM_DISPATCH_DEST" ] && diff -q "$NM_DISPATCH_SRC" "$NM_DISPATCH_DEST" &> /dev/null; then
+    echo "WiFi/wired-exclusive dispatcher is already up to date"
+else
+    sudo cp "$NM_DISPATCH_SRC" "$NM_DISPATCH_DEST"
+    sudo chown root:root "$NM_DISPATCH_DEST"
+    sudo chmod 755 "$NM_DISPATCH_DEST"
+    echo "WiFi/wired-exclusive dispatcher deployed"
+fi
+
 # Enable OpenSnitch Daemon
 # ========================
 
