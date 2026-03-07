@@ -1,0 +1,8 @@
+#!/bin/bash
+set -euo pipefail
+
+sudo systemctl stop sshd.service
+sudo pkill -x sshd 2>/dev/null || true
+pkill mosh-server 2>/dev/null || true
+
+echo "SSH server stopped. All sessions killed."

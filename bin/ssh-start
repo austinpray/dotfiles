@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+
+sudo systemctl start sshd.service
+
+echo "SSH server running."
+echo ""
+echo "Connect with:"
+ip -4 addr show | grep -oP 'inet \K[\d.]+' | grep -v '^127\.' | while read -r ip; do
+    echo "  ssh -p 22222 $(whoami)@$ip"
+    echo "  mosh --ssh=\"ssh -p 22222\" $(whoami)@$ip"
+done
+echo ""
+echo "Run ssh-end to stop."
