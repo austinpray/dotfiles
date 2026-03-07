@@ -1,6 +1,5 @@
 [user]
-	email = austin@austinpray.com
-	name = Austin Pray
+	useConfigOnly = true
 
 [core]
 	excludesfile = ~/dotfiles/.gitignore_global
