@@ -1,0 +1,21 @@
+#!/bin/bash
+set -euo pipefail
+
+if [ $# -ne 1 ]; then
+  echo "Usage: work-on <project-name>" >&2
+  exit 1
+fi
+
+name="$1"
+dir="$HOME/proj/$name"
+
+if [ ! -d "$dir" ]; then
+  echo "Error: $dir is not a directory" >&2
+  exit 1
+fi
+
+if tmux has-session -t "$name" 2>/dev/null; then
+  exec tmux attach-session -t "$name"
+else
+  exec tmux new-session -s "$name" -c "$dir" claude
+fi
