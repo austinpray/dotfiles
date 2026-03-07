@@ -1,0 +1,30 @@
+#!/bin/bash
+set -euo pipefail
+
+token_file=".github-token.txt"
+
+if [[ ! -f "$token_file" ]]; then
+    echo "error: $token_file not found in $(pwd)" >&2
+    echo "Create a .github-token.txt file with a scoped GitHub token for this project." >&2
+    exit 1
+fi
+
+token=$(< "$token_file")
+
+# Find the real gh binary by skipping this wrapper's directory
+script_dir="$(cd "$(dirname "$0")" && pwd)"
+real_gh=""
+IFS=: read -ra dirs <<< "$PATH"
+for dir in "${dirs[@]}"; do
+    if [[ "$dir" != "$script_dir" ]] && [[ -x "$dir/gh" ]]; then
+        real_gh="$dir/gh"
+        break
+    fi
+done
+
+if [[ -z "$real_gh" ]]; then
+    echo "error: could not find real gh binary on PATH" >&2
+    exit 1
+fi
+
+exec env GH_TOKEN="$token" "$real_gh" "$@"

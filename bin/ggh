@@ -1,0 +1,20 @@
+#!/bin/bash
+set -euo pipefail
+
+# Find the real gh binary by skipping the wrapper's directory
+script_dir="$(cd "$(dirname "$0")" && pwd)"
+real_gh=""
+IFS=: read -ra dirs <<< "$PATH"
+for dir in "${dirs[@]}"; do
+    if [[ "$dir" != "$script_dir" ]] && [[ -x "$dir/gh" ]]; then
+        real_gh="$dir/gh"
+        break
+    fi
+done
+
+if [[ -z "$real_gh" ]]; then
+    echo "error: could not find real gh binary on PATH" >&2
+    exit 1
+fi
+
+exec "$real_gh" "$@"
