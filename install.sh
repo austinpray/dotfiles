@@ -34,48 +34,52 @@ done
 # Install binaries
 # ================
 
-ARCH=$(uname -m)
-BINENV_VERSION="0.21.1"
+if [ -f "$HOME/.use-binenv" ]; then
+    ARCH=$(uname -m)
+    BINENV_VERSION="0.21.1"
 
-# Detect architecture
-case $ARCH in
-    x86_64)
-        ARCH="amd64"
-        ;;
-    aarch64|arm64)
-        ARCH="arm64"
-        ;;
-    *)
-        echo "Unsupported architecture: $ARCH"
-        exit 1
-        ;;
-esac
+    # Detect architecture
+    case $ARCH in
+        x86_64)
+            ARCH="amd64"
+            ;;
+        aarch64|arm64)
+            ARCH="arm64"
+            ;;
+        *)
+            echo "Unsupported architecture: $ARCH"
+            exit 1
+            ;;
+    esac
 
 
-mkdir -p ~/.local/bin
+    mkdir -p ~/.local/bin
 
-if ! command -v binenv &> /dev/null; then
-    echo "Installing binenv..."
-    (
-        cd "$(mktemp -d)"
-        curl -fsSL -O https://github.com/devops-works/binenv/releases/download/v${BINENV_VERSION}/binenv_linux_${ARCH}
-        curl -fsSL -O https://github.com/devops-works/binenv/releases/download/v${BINENV_VERSION}/checksums.txt
-        sha256sum  --check --ignore-missing checksums.txt
-        mv binenv_linux_${ARCH} binenv
-        chmod +x binenv
-        ./binenv update
-        ./binenv install binenv
-        rm binenv
-    )
+    if ! command -v binenv &> /dev/null; then
+        echo "Installing binenv..."
+        (
+            cd "$(mktemp -d)"
+            curl -fsSL -O https://github.com/devops-works/binenv/releases/download/v${BINENV_VERSION}/binenv_linux_${ARCH}
+            curl -fsSL -O https://github.com/devops-works/binenv/releases/download/v${BINENV_VERSION}/checksums.txt
+            sha256sum  --check --ignore-missing checksums.txt
+            mv binenv_linux_${ARCH} binenv
+            chmod +x binenv
+            ./binenv update
+            ./binenv install binenv
+            rm binenv
+        )
+    else
+        echo "binenv is already installed, skipping installation"
+    fi
+
+    ~/.binenv/binenv install starship
+    # ~/.binenv/binenv install jq
+    ~/.binenv/binenv install gh
+    ~/.binenv/binenv install delta
+    ~/.binenv/binenv install dust
 else
-    echo "binenv is already installed, skipping installation"
+    echo "Skipping binenv installation (no ~/.use-binenv flag found)"
 fi
-
-~/.binenv/binenv install starship
-# ~/.binenv/binenv install jq
-~/.binenv/binenv install gh
-~/.binenv/binenv install delta
-~/.binenv/binenv install dust
 
 # ~/.binenv/gh extension install mislav/gh-branch
 
