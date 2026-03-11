@@ -1,6 +1,8 @@
 export EDITOR=vim
 export PATH=/usr/local/bin:$PATH
-export PATH=$HOME/.binenv:$PATH
+if command -v binenv &>/dev/null || [ -x "$HOME/.binenv/binenv" ]; then
+    export PATH=$HOME/.binenv:$PATH
+fi
 export PATH=$HOME/.local/bin:$PATH
 export PATH="$HOME/.devcontainers/bin:$PATH"
 export PATH=$HOME/dotfiles/bin:$PATH
@@ -25,4 +27,6 @@ bindkey -v
 eval "$(starship init zsh)"
 
 # completion
-source <(binenv completion zsh)
+if command -v binenv &>/dev/null; then
+    source <(binenv completion zsh)
+fi
