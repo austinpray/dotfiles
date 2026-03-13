@@ -30,3 +30,7 @@ eval "$(starship init zsh)"
 if command -v binenv &>/dev/null; then
     source <(binenv completion zsh)
 fi
+
+if [ -f "$HOME/analytics/.shellenv" ]; then
+    source "$HOME/analytics/.shellenv"
+fi
