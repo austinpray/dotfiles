@@ -33,22 +33,30 @@
     },
     "clamshell_microphone": null,
     "clipboard_handling": "dont_modify",
+    "custom_filler_words": null,
     "custom_words": [
       "CLAUDE.md"
     ],
     "debug_mode": false,
     "experimental_enabled": false,
     "external_script_path": null,
+    "extra_recording_buffer_ms": 0,
     "history_limit": 5,
     "keyboard_implementation": "tauri",
+    "lazy_stream_close": false,
     "log_level": "debug",
     "model_unload_timeout": "never",
     "mute_while_recording": true,
-    "overlay_position": "none",
+    "onboarding_completed": true,
+    "ort_accelerator": "auto",
+    "overlay_position": "bottom",
+    "overlay_style": "none",
+    "paste_delay_after_ms": 60,
     "paste_delay_ms": 60,
     "paste_method": "direct",
     "post_process_api_keys": {
       "anthropic": "",
+      "bedrock_mantle": "",
       "cerebras": "",
       "custom": "",
       "groq": "",
@@ -59,6 +67,7 @@
     "post_process_enabled": false,
     "post_process_models": {
       "anthropic": "",
+      "bedrock_mantle": "",
       "cerebras": "",
       "custom": "",
       "groq": "",
@@ -130,6 +139,14 @@
         "label": "Z.AI",
         "models_endpoint": "/models",
         "supports_structured_output": true
+      },
+      {
+        "allow_base_url_edit": false,
+        "base_url": "https://bedrock-mantle.us-east-1.api.aws/v1",
+        "id": "bedrock_mantle",
+        "label": "AWS Bedrock (Mantle)",
+        "models_endpoint": "/models",
+        "supports_structured_output": true
       }
     ],
     "post_process_selected_prompt_id": null,
@@ -139,12 +156,19 @@
     "selected_microphone": "pipewire",
     "selected_model": "parakeet-tdt-0.6b-v3",
     "selected_output_device": null,
+    "settings_schema_version": 1,
     "show_tray_icon": true,
+    "show_whats_new_on_update": true,
     "sound_theme": "marimba",
     "start_hidden": true,
+    "theme": "system",
+    "transcribe_accelerator": "auto",
+    "transcribe_gpu_device": -1,
     "translate_to_english": false,
     "typing_tool": "auto",
     "update_checks_enabled": true,
+    "vad_enabled": true,
+    "whats_new_last_seen_version": "",
     "word_correction_threshold": 0.18
   }
 }
