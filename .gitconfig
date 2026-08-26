@@ -1,6 +1,15 @@
+# This file is included by a real, untracked ~/.gitconfig rather than symlinked
+# to it; see install.sh. Anything a tool writes with `git config --global` lands
+# in that outer file, so machine-local state stays out of version control.
+#
+# No email here on purpose. These dotfiles are shared between personal and work
+# machines, and an address committed here would follow the repo onto all of them.
+# useConfigOnly makes git refuse to guess an author instead of silently
+# attributing commits to whichever identity happens to be configured, so a
+# machine with no identity set fails loudly rather than committing as the wrong
+# person.
 [user]
 	useConfigOnly = true
-	email = 71290498+austinpray-mixpanel@users.noreply.github.com
 	name = Austin Pray
 
 [core]

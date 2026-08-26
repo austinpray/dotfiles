@@ -7,7 +7,44 @@ cd ~
 # ================
 
 DOTFILES_DIR="$HOME/dotfiles"
-DOTFILES=(.gitconfig .gitignore_global .vimrc .zshrc .tmux.conf .config/starship.toml .config/containers/containers.conf .config/ghostty/config .config/mako/config .config/gammastep/config.ini .local/share/com.pais.handy/settings_store.json)
+DOTFILES=(.gitignore_global .vimrc .zshrc .tmux.conf .config/starship.toml .config/containers/containers.conf .config/ghostty/config .config/mako/config .config/gammastep/config.ini .local/share/com.pais.handy/settings_store.json)
+
+# ~/.gitconfig is a real file that *includes* the tracked one, rather than a
+# symlink to it. Plenty of tooling configures git by writing `git config
+# --global` (gh auth setup-git, and the gcpdevbox configure-git-auth.sh, which
+# stamps an identity from the GitHub profile on every interactive shell). Those
+# writes follow a symlink, so symlinking this file puts machine-local identity
+# under version control and carries a work email onto every machine that shares
+# these dotfiles. Note that `git config --global` does not read `include`
+# directives, so such tools cannot see the tracked values and will keep
+# rewriting them; only the outer file satisfies them.
+#
+# Tracked settings come from the include, machine-local ones sit after it, and
+# git takes the last value for a key, so the machine always wins.
+setup_gitconfig() {
+    local target="$HOME/.gitconfig"
+
+    if [ -L "$target" ]; then
+        echo "Replacing ~/.gitconfig symlink with a machine-local file"
+        rm "$target"
+    elif [ -e "$target" ] && grep -qF 'path = ~/dotfiles/.gitconfig' "$target"; then
+        echo ".gitconfig already includes the dotfiles config"
+        return
+    elif [ -e "$target" ]; then
+        echo "Backing up existing .gitconfig to .gitconfig.backup"
+        mv "$target" "$target.backup"
+    fi
+
+    echo "Creating $target (machine-local, includes the tracked config)"
+    cat > "$target" <<'GITCONFIG'
+# Machine-local git config. Deliberately not tracked in ~/dotfiles: this is
+# where this machine's identity lives, along with anything written by
+# `git config --global`. Shared settings come from the include below.
+[include]
+	path = ~/dotfiles/.gitconfig
+GITCONFIG
+}
+setup_gitconfig
 
 # Symlink dotfiles to home directory
 for file in "${DOTFILES[@]}"; do
