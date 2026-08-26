@@ -1,5 +1,7 @@
 [user]
 	useConfigOnly = true
+	email = 71290498+austinpray-mixpanel@users.noreply.github.com
+	name = Austin Pray
 
 [core]
 	excludesfile = ~/dotfiles/.gitignore_global
