@@ -34,3 +34,6 @@ fi
 if [ -f "$HOME/analytics/.shellenv" ]; then
     source "$HOME/analytics/.shellenv"
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
