@@ -11,10 +11,22 @@ description: Install and manage dotfiles in this repository. Use when adding a n
 
 2. Add the path to the `DOTFILES` array in `install.sh`:
    ```bash
-   DOTFILES=(.gitconfig .gitignore_global ... .config/foo/config)
+   DOTFILES=(.gitignore_global .vimrc ... .config/foo/config)
    ```
 
+   If the config only makes sense in front of a monitor (compositor, terminal,
+   notifications, dictation), add it to `DOTFILES_DESKTOP` instead. That array
+   is folded into `DOTFILES` only on an Arch desktop, so a headless devbox does
+   not collect symlinks to configs nothing there reads.
+
 3. Run `./install.sh` to create the symlink
+
+## Shell configuration
+
+Shell environment goes in `shell/common.sh`, which both `.zshrc` and a marker
+block in the machine-local `~/.bashrc` source. Put anything shell-specific
+(zsh keybindings, bash completion) in the rc file instead, and gate anything
+devbox-specific on `[ -f "$HOME/.gcpdevbox" ]`.
 
 ## Directory configs (Sway, Waybar)
 
