@@ -83,6 +83,23 @@ GITCONFIG
             printf '\tname = %s\n' "$existing_name" >> "$target"
         fi
     fi
+
+    # gh writes its credential helpers with `git config --global`, so they lived
+    # in the file this function just moved aside and the new one carries none.
+    # Without them git cannot authenticate to GitHub over HTTPS, and nothing
+    # else puts them back: a devbox's configure-git-auth.sh runs setup-git only
+    # when it also has to correct the monorepo's remote. Regenerating beats
+    # copying the old lines forward, because each one names a single versioned
+    # gh binary that a version manager eventually moves out from under it.
+    if command -v gh &> /dev/null && [ -f "$HOME/.config/gh/hosts.yml" ]; then
+        echo "Restoring gh's git credential helpers"
+        gh auth setup-git
+    elif grep -q '^\[credential' "$target.backup" 2> /dev/null; then
+        echo "warning: the previous ~/.gitconfig set git credential helpers that"
+        echo "         this install cannot restore, as gh is absent or logged out."
+        echo "         Run 'gh auth setup-git' (after 'gh auth login') to rewrite"
+        echo "         them, or copy them from $target.backup"
+    fi
 }
 setup_gitconfig
 

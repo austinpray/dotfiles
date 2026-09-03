@@ -36,7 +36,7 @@ The script is idempotent and detects its machine, so it is safe to re-run on eit
 
 **Directory configs**: Sway and Waybar configs are symlinked as directories by `scripts/arch-linux.sh`, not via the DOTFILES array.
 
-**`.gitconfig` is not symlinked**: `install.sh` writes a real `~/.gitconfig` that `[include]`s the tracked one. Tools that run `git config --global` (`gh auth setup-git`, the gcpdevbox `configure-git-auth.sh`) write through a symlink, which would commit machine-local identity and carry a work email to every machine sharing these dotfiles. Keep identity out of the tracked file; put it in `~/.gitconfig` after the include. Re-running `install.sh` reads the existing `user.email`/`user.name` back out and rewrites them after the include, since the tracked config's `user.useConfigOnly` would otherwise leave git refusing to commit.
+**`.gitconfig` is not symlinked**: `install.sh` writes a real `~/.gitconfig` that `[include]`s the tracked one. Tools that run `git config --global` (`gh auth setup-git`, the gcpdevbox `configure-git-auth.sh`) write through a symlink, which would commit machine-local identity and carry a work email to every machine sharing these dotfiles. Keep identity out of the tracked file; put it in `~/.gitconfig` after the include. Re-running `install.sh` reads the existing `user.email`/`user.name` back out and rewrites them after the include, since the tracked config's `user.useConfigOnly` would otherwise leave git refusing to commit. It then re-runs `gh auth setup-git`, because gh's credential helpers live in the outer file too and git cannot reach GitHub over HTTPS without them.
 
 **Key config locations**:
 
